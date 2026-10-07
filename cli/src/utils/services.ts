@@ -126,6 +126,8 @@ function parseResource(serviceJsonPath: string): DiscoveredResource {
     configPath: serviceJsonPath,
     config,
     stack: config.stack,
+    port: config.port,
+    type: config.appType,
   };
 }
 
