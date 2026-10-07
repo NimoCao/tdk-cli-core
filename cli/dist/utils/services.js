@@ -99,6 +99,8 @@ function parseResource(serviceJsonPath) {
         configPath: serviceJsonPath,
         config,
         stack: config.stack,
+        port: config.port,
+        type: config.appType,
     };
 }
 export function discoverResourcesWithProblems(projectRoot) {
