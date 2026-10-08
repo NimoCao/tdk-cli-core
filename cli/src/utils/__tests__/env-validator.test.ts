@@ -17,11 +17,13 @@ afterEach(() => {
   rmSync(root, { recursive: true, force: true });
 });
 
-const escapeRegExp = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const writeEnv = (content: string) => writeFileSync(join(root, ".env"), content);
 const readEnv = () => readFileSync(join(root, ".env"), "utf-8");
-const envValue = (content: string, name: string) =>
-  content.match(new RegExp(`^${escapeRegExp(name)}=(.*)$`, "m"))?.[1];
+const envValue = (content: string, name: string) => {
+  const prefix = `${name}=`;
+  const line = content.split("\n").find((l) => l.startsWith(prefix));
+  return line?.slice(prefix.length).replace(/\r$/, "");
+};
 
 describe("generated project .env", () => {
   it("generates a random JWT secret per project", () => {

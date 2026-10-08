@@ -139,11 +139,14 @@ function hostLoad(): number {
   return Number.parseFloat(shOk("sysctl -n vm.loadavg").replace(/[{}]/g, "").trim().split(/\s+/)[0] ?? "0");
 }
 
-const escapeRegExp = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 function hostFreeMiB(): number {
   const out = shOk("vm_stat");
   const page = Number(out.match(/page size of (\d+)/)?.[1] ?? 16384);
-  const pages = (key: string) => Number(out.match(new RegExp(`${escapeRegExp(key)}:\\s+(\\d+)`))?.[1] ?? 0);
+  // vm_stat lines look like "Pages free:    12345."; match the label as plain text, not as a RegExp.
+  const pages = (key: string) => {
+    const line = out.split("\n").find((l) => l.startsWith(`${key}:`));
+    return Number(line?.slice(key.length + 1).match(/\d+/)?.[0] ?? 0);
+  };
   return Math.round(((pages("Pages free") + pages("Pages speculative")) * page) / 1048576);
 }
 

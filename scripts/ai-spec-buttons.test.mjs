@@ -193,7 +193,7 @@ describe("buildButtonsHtml", () => {
     assert.ok(html.includes(`https://claude.ai/new?q=${q}`));
     assert.ok(html.includes(`https://chatgpt.com/?q=${q}`));
     assert.ok(!html.includes("%0A"));
-    assert.ok(!linkHosts(html).includes("img.shields.io"));
+    assert.ok(!linkHosts(html).some((host) => host === "img.shields.io"));
     // One row: badges separated by &nbsp;, never by newlines.
     assert.ok(html.includes(")&nbsp;[![Claude]"));
     assert.ok(html.includes(")&nbsp;[![Codex]"));

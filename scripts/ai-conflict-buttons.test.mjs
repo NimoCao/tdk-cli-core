@@ -48,7 +48,7 @@ describe("buildPrompt", () => {
       prNumber: 645,
       body: "Fixes #449.\n",
     });
-    assert.ok(links(prompt).includes(url));
+    assert.ok(links(prompt).some((link) => link === url));
     assert.ok(prompt.includes("Fetch xiehuanyi feat/ui-keyboard-navigation-round2"));
     assert.ok(prompt.includes("merge origin/main"));
     assert.ok(prompt.includes("Keep the changes from that branch. Keep main's changes."));
@@ -123,7 +123,7 @@ describe("buildComment", () => {
     const comment = buildComment({ ...input, conflicting: false });
     assert.ok(comment.startsWith(MARKER));
     assert.ok(comment.includes("no longer conflicts"));
-    assert.ok(!linkHosts(comment).includes("grok.com"));
+    assert.ok(!linkHosts(comment).some((host) => host === "grok.com"));
     assert.ok(!comment.includes("# Resolve this conflict in"));
   });
 });
