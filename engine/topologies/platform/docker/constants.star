@@ -104,6 +104,10 @@ def app_image_name(stack, res_name):
     """Image tag (:dev) of one service: <project>_<stack>_<resource>:dev."""
     return PROJECT_NAME + "_" + stack + "_" + res_name + ":dev"
 
+def infra_compose_project_name(infra):
+    """Compose project for a shared platform stack: <project>-<infra> (e.g. tdk-erp-system-database-management)."""
+    return PROJECT_NAME_HYPHEN + "-" + infra
+
 def migrator_image_name(stack):
     """Image tag (:dev) of a stack's migrator: <project>_<stack>-db-migrator:dev."""
     return PROJECT_NAME + "_" + stack + "-db-migrator:dev"
@@ -194,6 +198,7 @@ PlatformDockerConstants = struct(
     DB_CONFIG = DB_CONFIG,
     get_db_name = get_db_name,
     compose_project_name = compose_project_name,
+    infra_compose_project_name = infra_compose_project_name,
     app_image_name = app_image_name,
     migrator_image_name = migrator_image_name,
     get_database_url_base = get_database_url_base,

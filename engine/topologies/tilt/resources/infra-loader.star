@@ -43,14 +43,20 @@ def _compose_has_service(compose_path, service_name):
     return service_name in services
 
 
-def _docker_compose(compose_paths, env_file):
-    """docker_compose() wrapper: Tilt's builtin rejects env_file=None outright
-    (it type-checks the kwarg as path|string, not Optional), so the keyword must be
-    omitted entirely rather than passed as None when no .env file exists."""
+def _docker_compose(compose_paths, env_file, infra):
+    """docker_compose() wrapper for a shared platform stack, in its own Compose project.
+
+    Without project_name, Compose names the project after the file's directory, so every
+    TDK project on one Docker daemon shares `database-management`, `traefik` and so on.
+    Then one project's `up` can recreate or remove another project's services.
+    Tilt's builtin rejects env_file=None outright (it type-checks the kwarg as path|string,
+    not Optional), so the keyword must be omitted entirely rather than passed as None.
+    """
+    project_name = PlatformDockerConstants.infra_compose_project_name(infra)
     if env_file:
-        docker_compose(compose_paths, env_file=env_file)
+        docker_compose(compose_paths, project_name=project_name, env_file=env_file)
     else:
-        docker_compose(compose_paths)
+        docker_compose(compose_paths, project_name=project_name)
 
 
 def _generate_database_management_compose():
@@ -134,7 +140,7 @@ def _register_platform_postgres(should_enable, root_prefix="", env_file=None, wr
     postgres_compose = _ensure_database_management_compose(root_prefix, write_fn)
     if _file_exists(postgres_compose):
         debug_log("INFRA: Loading postgres compose from {}".format(postgres_compose))
-        _docker_compose(postgres_compose, env_file)
+        _docker_compose(postgres_compose, env_file, 'database-management')
         dc_resource('postgres', labels=['infra.tools'], resource_deps=['init-networks'], auto_init=True)
         return
     message = "Shared platform Postgres compose was not materialized at {}".format(postgres_compose)
@@ -176,7 +182,7 @@ def _load_database_management(should_enable, root_prefix="", env_file=None, writ
     messaging_compose = root_prefix + 'services/platform/messaging/docker-compose.yml'
     if _file_exists(messaging_compose):
         debug_log("INFRA: Loading messaging compose from {}".format(messaging_compose))
-        _docker_compose(messaging_compose, env_file)
+        _docker_compose(messaging_compose, env_file, 'messaging')
         # Register only services present in the project compose file. Minimal
         # NATS-only examples should not need to add an unrelated Redis broker.
         if _compose_has_service(messaging_compose, 'redis'):
@@ -218,7 +224,7 @@ def _load_infisical(should_enable, root_prefix="", env_file=None):
         return
 
     print("🔐 Loading Infisical...")
-    _docker_compose(compose_file, env_file)
+    _docker_compose(compose_file, env_file, 'infisical')
     dc_resource('infisical-db', labels=['infra.tools', 'secrets'], resource_deps=['init-networks'], auto_init=True)
     dc_resource('infisical-redis', labels=['infra.tools', 'secrets'], resource_deps=['init-networks'], auto_init=True)
     dc_resource('infisical', labels=['infra.tools', 'secrets'], resource_deps=['init-networks', 'infisical-db', 'infisical-redis'], auto_init=True)
@@ -245,7 +251,7 @@ def _load_standalone_traefik(root_prefix, env_file, write_fn):
         write_fn(compose_rel, content)
     compose_file = root_prefix + compose_rel if root_prefix else compose_rel
     print("🌐 Loading standalone Traefik from {}".format(compose_file))
-    _docker_compose(compose_file, env_file)
+    _docker_compose(compose_file, env_file, 'traefik')
     dc_resource(
         "traefik",
         labels=["infra.tools"],
@@ -281,7 +287,7 @@ def _load_proxy(should_enable, root_prefix="", env_file=None, write_fn=None):
 
     # Use introvertic/infra traefik configuration (primary)
     # Keep legacy core.yml for network definitions during migration
-    _docker_compose(compose_files, env_file)
+    _docker_compose(compose_files, env_file, 'proxy')
     
     # Traefik depends on core infrastructure being healthy (not just started) to prevent 504s
     dc_resource('traefik', 
@@ -316,7 +322,7 @@ def _load_monitoring(should_enable, root_prefix="", env_file=None):
         return
     
     print("📊 Loading monitoring services...")
-    _docker_compose(root_prefix + 'services/platform/monitoring/docker-compose.yml', env_file)
+    _docker_compose(root_prefix + 'services/platform/monitoring/docker-compose.yml', env_file, 'monitoring')
     for svc in ['signoz-frontend', 'signoz-otel-collector', 'signoz-query-service']:
         dc_resource(svc, labels=['observability.apm'], auto_init=True)
     dc_resource('clickhouse', labels=['observability.storage'], auto_init=True)
@@ -335,7 +341,7 @@ def _load_debezium(should_enable, root_prefix="", env_file=None):
         return
     
     print("🔄 Loading Enhanced Debezium...")
-    _docker_compose(root_prefix + 'services/platform/cdc/docker-compose.enhanced.yml', env_file)
+    _docker_compose(root_prefix + 'services/platform/cdc/docker-compose.enhanced.yml', env_file, 'cdc')
     dc_resource('nats-http-bridge', labels=['cdc'], resource_deps=['nats'], auto_init=True)
     dc_resource('debezium-connect', labels=['cdc'], resource_deps=['kafka', 'postgres', 'nats-http-bridge'], auto_init=True)
     dc_resource('enhanced-connector-setup', labels=['cdc'], resource_deps=['debezium-connect', 'postgres', 'nats-http-bridge'], auto_init=False)
@@ -351,7 +357,7 @@ def _load_elk(should_enable, root_prefix="", env_file=None):
         return
 
     print("📊 Loading ELK stack...")
-    _docker_compose(root_prefix + 'docker/elk-compose.yml', env_file)
+    _docker_compose(root_prefix + 'docker/elk-compose.yml', env_file, 'elk')
     dc_resource('elasticsearch', labels=['observability.elk'], auto_init=True)
     dc_resource('logstash', labels=['observability.elk', 'processor', 'logs'], resource_deps=['elasticsearch'], auto_init=True)
     dc_resource('kibana', labels=['observability.elk', 'frontend', 'dashboard'], resource_deps=['elasticsearch'], auto_init=True)
