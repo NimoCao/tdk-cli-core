@@ -7,5 +7,8 @@ RUN npx --yes @angular/cli@latest new app --defaults --skip-git --skip-install -
     --ssr=false --ai-config=none --package-manager=npm </dev/null
 WORKDIR /work/app
 RUN npm install
+RUN chown -R node:node .
+USER node
+HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=3 CMD nc -z 127.0.0.1 ${PORT:-4200} || exit 1
 # ng serve must listen beyond loopback (--host) and on the port TDK assigns.
 CMD ["sh", "-c", "npx ng serve --host 0.0.0.0 --port ${PORT:-4200}"]
