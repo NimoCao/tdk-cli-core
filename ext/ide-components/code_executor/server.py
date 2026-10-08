@@ -8,6 +8,7 @@ Execute commands from web UI at http://localhost:9768
 
 import json
 import os
+import shlex
 import subprocess
 import sys
 import urllib.parse
@@ -31,11 +32,13 @@ class CodeExecutorHandler(BaseIDEHandler):
         'sudo', 'su -', 'passwd', 'deluser', 'userdel'
     ]
     
-    ALLOWED_PREFIXES = [
-        'bun ', 'ls ', 'pwd', 'echo ', 'cat ', 'head ', 'tail ', 
-        'grep ', 'find ', 'cd ', 'mkdir ', 'touch ', 'clear', 'exit',
-        'npm ', 'yarn ', 'npx ', 'pnpm ', 'git ', 'curl ', 'wget '
-    ]
+    ALLOWED_PROGRAMS = {
+        'bun', 'ls', 'pwd', 'echo', 'cat', 'head', 'tail', 'grep', 'find',
+        'mkdir', 'touch', 'clear', 'exit', 'npm', 'yarn', 'npx', 'pnpm', 'git', 'curl', 'wget'
+    }
+
+    # Shell operators are rejected rather than interpreted: commands run without a shell.
+    SHELL_OPERATORS = set(';&|<>$`\\(){}\n\r')
     
     def validate_command(self, cmd: str) -> tuple:
         """
@@ -47,11 +50,18 @@ class CodeExecutorHandler(BaseIDEHandler):
             if dangerous in cmd.lower():
                 return False, f"Command blocked for safety: {dangerous}"
         
+        if any(ch in self.SHELL_OPERATORS for ch in cmd):
+            return False, "Shell operators (; & | < > $ ` ( ) { }) are not allowed"
+
+        try:
+            argv = shlex.split(cmd)
+        except ValueError as e:
+            return False, f"Could not parse command: {e}"
+        if not argv:
+            return False, "Empty command"
+
         # Only allow bun commands and safe system commands
-        cmd_stripped = cmd.strip()
-        is_allowed = any(cmd_stripped.startswith(prefix) for prefix in self.ALLOWED_PREFIXES)
-        
-        if not is_allowed:
+        if argv[0] not in self.ALLOWED_PROGRAMS:
             return False, "Only bun, npm, git, and safe system commands are allowed"
         
         return True, None
@@ -69,8 +79,8 @@ class CodeExecutorHandler(BaseIDEHandler):
         try:
             # Execute with timeout
             result = subprocess.run(
-                cmd,
-                shell=True,
+                shlex.split(cmd),
+                shell=False,
                 cwd=work_dir,
                 capture_output=True,
                 text=True,
