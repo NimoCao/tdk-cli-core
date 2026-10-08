@@ -26,6 +26,10 @@ bun run typecheck && bun run lint && bun run test   # about a minute; all of it 
 
 If one of these fails on a clean checkout, that is a bug in the project, not in your setup: please [open an issue](https://github.com/tdk-landscape/tdk-cli-core/issues/new/choose).
 
+## Tests
+
+Every new feature or behavior change needs automated tests in the same pull request. Put tests next to the code they cover, or in the existing suite for that area (`cli/src/**/__tests__/`, `tests/fuzz/`). A bug fix adds a test that fails before the fix and passes after it. If a test is not practical, the pull request says why and links an issue that tracks adding it. Reviewers check this in every pull request, and the checks listed in [03-open-a-pr.md](docs/contributing/03-open-a-pr.md#run-the-checks-for-your-change) run the suite in CI.
+
 ## Find bugs
 
 You do not need to write code to help. Run a command, compare what it prints with what TDK promises (its `--help`, the docs, or another command), and report any difference. That is a bug.

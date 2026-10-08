@@ -21,7 +21,7 @@ The generated Tilt and Compose files for three sample projects are checked again
 
 For a bug fix or behavior change, use the same steps on `main` and your branch when possible. Paste the real before-and-after output; do not recreate it from memory. Include the command, project or fixture, and any setup needed to repeat it. Cover the empty, error, or recovery cases named in the issue.
 
-If you test the built CLI entry point, run `bun run build` first so it does not use old compiled files. Check interactive commands such as `tdk ui` in a real terminal. If an automated test is missing, say why and link an issue to add it.
+If you test the built CLI entry point, run `bun run build` first so it does not use old compiled files. Check interactive commands such as `tdk ui` in a real terminal. If an automated test is missing, say why and link an issue to add it. New behavior and bug fixes need tests in the same pull request; see [Tests in CONTRIBUTING.md](../../CONTRIBUTING.md#tests).
 
 ## Push your branch
 
