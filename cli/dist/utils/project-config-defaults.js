@@ -1,5 +1,6 @@
 // Copyright (c) 2026 TDK Landscape contributors
 // SPDX-License-Identifier: MIT
+import { DATABASE_MANAGEMENT_FEATURE } from "./constants.js";
 /**
  * Defaults shared by project generation and CLI predicates.
  *
@@ -13,5 +14,5 @@
  * they report Postgres-will-start while the engine does not start it (or
  * the reverse). See shared-platform-postgres.ts.
  */
-export const DEFAULT_ALWAYS_ENABLED_INFRA = ["database-management", "proxy"];
+export const DEFAULT_ALWAYS_ENABLED_INFRA = [DATABASE_MANAGEMENT_FEATURE, "proxy"];
 //# sourceMappingURL=project-config-defaults.js.map

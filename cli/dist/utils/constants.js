@@ -2,6 +2,21 @@
 // It is looked up by name in doctor-report.ts, so both sides must use this
 // constant instead of a bare string literal.
 export const CONTAINER_RUNTIME_CHECK = "Container Runtime";
+// Resource type id for services the user brings themselves. Referenced by
+// value in several modules, so a typo in one copy would compile and silently
+// stop matching. `types/index.ts` keeps its own literal: it is the leaf module
+// that defines ResourceType, so importing this file back would be circular.
+// Typed as the literal (not the wider ResourceType union): computed keys built
+// from it stay narrow enough to satisfy Record<ResourceType, ...>.
+export const BRING_YOUR_OWN_TYPE = "bring-your-own";
+// Compile-time check that the literal above really is a ResourceType member.
+const _bringYourOwnIsResourceType = BRING_YOUR_OWN_TYPE;
+// Stack feature id for the shared platform database.
+export const DATABASE_MANAGEMENT_FEATURE = "database-management";
+// Root .tiltignore written by the generator and checked by doctor drift.
+export const TILTIGNORE_FILE = ".tiltignore";
+// Manifest file name for a resource, used by discovery and the resource command.
+export const SERVICE_JSON = "service.json";
 export const MASTER_CONFIG_FILES = [
     "TILT_TECH_STACK.star",
     "TILT_RESOURCE_DEFAULTS.star",
@@ -15,7 +30,7 @@ export const VALID_RESOURCE_TYPES = [
     "worker",
     "migrator",
     "mcp",
-    "bring-your-own",
+    BRING_YOUR_OWN_TYPE,
 ];
 // Frontend/library/sdk services are served statically or consumed as
 // packages, so they never need a "start" script - only backend/worker/
@@ -29,7 +44,7 @@ export const REQUIRED_PACKAGE_SCRIPTS = {
     frontend: ["dev", "build"],
     library: ["dev", "build"],
     sdk: ["dev", "build"],
-    "bring-your-own": [],
+    [BRING_YOUR_OWN_TYPE]: [],
 };
 // Version specifiers that pin nothing at all - a fresh `bun install`/`npm install`
 // can pull a different (possibly breaking) version on every run.
@@ -46,7 +61,7 @@ export const PORT_RANGES = {
     backend: { base: 4000, min: 4000, max: 4999, range: "4000-4999" },
     // An MCP server is an HTTP service, so it shares the backend-compatible range with bring-your-own.
     mcp: { base: 4000, min: 4000, max: 5999, range: "4000-5999" },
-    "bring-your-own": { base: 4000, min: 4000, max: 5999, range: "4000-5999" },
+    [BRING_YOUR_OWN_TYPE]: { base: 4000, min: 4000, max: 5999, range: "4000-5999" },
     worker: { base: 6000, min: 6000, max: 6999, range: "6000-6999" },
     health: { base: 5000, min: 5000, max: 5999, range: "5000-5999" },
     migrator: { base: 7000, min: 7000, max: 7999, range: "7000-7999" },

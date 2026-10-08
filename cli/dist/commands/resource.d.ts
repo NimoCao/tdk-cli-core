@@ -39,7 +39,7 @@ export declare function createByoServiceJson(name: string, stack: string, port: 
     $schema: string;
     schemaVersion: number;
     appName: string;
-    appType: string;
+    appType: "bring-your-own";
     stack: string;
     port: number;
     healthCheckPath: string;
@@ -50,7 +50,7 @@ export declare function createByoServiceJson(name: string, stack: string, port: 
     $schema: string;
     schemaVersion: number;
     appName: string;
-    appType: string;
+    appType: "bring-your-own";
     stack: string;
     port: number;
     healthCheckPath: string;

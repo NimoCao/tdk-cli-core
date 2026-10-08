@@ -1,6 +1,9 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
+import { DATABASE_MANAGEMENT_FEATURE } from "./constants.js";
 export const STACK_FEATURES = {
-    "database-management": {
-        name: "database-management",
+    DATABASE_MANAGEMENT_FEATURE: {
+        name: DATABASE_MANAGEMENT_FEATURE,
         description: "Generate and load the stack-level PostgreSQL docker-compose file",
         generatedFiles: ["services/platform/database-management/docker-compose.yml"],
     },

@@ -9,6 +9,7 @@
  * Frontend services: api-client, env-config, api-index (enabled by default)
  * Backend services: prisma (enabled by default)
  */
+import { BRING_YOUR_OWN_TYPE } from "./constants.js";
 export const RESOURCE_FEATURES = {
     // ============================================================================
     // FRONTEND GENERATORS
@@ -161,7 +162,7 @@ export const RESOURCE_FEATURES = {
  */
 export function getDefaultFeaturesForResourceType(appType) {
     // bring-your-own doesn't generate application code, so no features
-    if (appType === "bring-your-own") {
+    if (appType === BRING_YOUR_OWN_TYPE) {
         return [];
     }
     const defaults = [];

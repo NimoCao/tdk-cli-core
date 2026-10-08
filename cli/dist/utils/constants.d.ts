@@ -1,5 +1,9 @@
 import type { ResourceType } from "../types/index.js";
 export declare const CONTAINER_RUNTIME_CHECK = "Container Runtime";
+export declare const BRING_YOUR_OWN_TYPE: "bring-your-own";
+export declare const DATABASE_MANAGEMENT_FEATURE = "database-management";
+export declare const TILTIGNORE_FILE = ".tiltignore";
+export declare const SERVICE_JSON = "service.json";
 export declare const MASTER_CONFIG_FILES: readonly ["TILT_TECH_STACK.star", "TILT_RESOURCE_DEFAULTS.star", "spec.master"];
 export declare const VALID_RESOURCE_TYPES: ResourceType[];
 export declare const REQUIRED_PACKAGE_SCRIPTS: Record<ResourceType, readonly string[]>;

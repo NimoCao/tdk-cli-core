@@ -4,6 +4,7 @@ import { execFileSync, execSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { basename, dirname, join, relative } from "node:path";
 import { BACKEND_LANGUAGES } from "../backend-languages/registry.js";
+import { BRING_YOUR_OWN_TYPE, DATABASE_MANAGEMENT_FEATURE } from "./constants.js";
 import { execAsync } from "./exec-async.js";
 import { formatCount } from "./formatting.js";
 import { findProjectRoot } from "./paths.js";
@@ -123,7 +124,7 @@ export function checkPrismaConsistency(projectRoot = findProjectRoot() ?? proces
         findings.push(...prismaConfigFindings(resource.path).map((finding) => `${resource.name}: ${finding}`));
         const appType = resource.config?.appType ?? resource.type;
         if (appType === "migrator") {
-            const postgresDependency = resource.config?.dependsOn?.some((name) => name === "postgres" || name === "database-management");
+            const postgresDependency = resource.config?.dependsOn?.some((name) => name === "postgres" || name === DATABASE_MANAGEMENT_FEATURE);
             if (!postgresDependency)
                 findings.push(`${resource.name}: migrator must depend on postgres or database-management`);
         }
@@ -182,7 +183,7 @@ function ownsRuntimeFiles(resource) {
  * (or its `buildContext`), or pulls `image`, and never generates the golden-layer Dockerfile that COPYs a package.json.
  */
 function isBringYourOwn(resource) {
-    return (resource.config?.appType ?? resource.type) === "bring-your-own";
+    return (resource.config?.appType ?? resource.type) === BRING_YOUR_OWN_TYPE;
 }
 export function checkResourcePackageJson(projectRoot = findProjectRoot() ?? process.cwd()) {
     const missing = discoverResourcesFromRoot(projectRoot)
@@ -236,7 +237,7 @@ function isRoutedToPort(resource) {
     const appType = resource.config?.appType;
     if (isApiServiceType(appType))
         return true;
-    return appType === "bring-your-own" && resource.config?.exposeViaProxy !== false;
+    return appType === BRING_YOUR_OWN_TYPE && resource.config?.exposeViaProxy !== false;
 }
 /**
  * Two routed resources on one `port`. This is a warning, not a failure: the engine publishes no service
@@ -343,7 +344,7 @@ export function checkSharedStackRoutes(projectRoot = findProjectRoot() ?? proces
     for (const resource of discoverResourcesFromRoot(projectRoot)) {
         const config = resource.config;
         const routable = isApiServiceType(config?.appType) ||
-            (config?.appType === "bring-your-own" && config.exposeViaProxy !== false);
+            (config?.appType === BRING_YOUR_OWN_TYPE && config.exposeViaProxy !== false);
         if (!routable)
             continue;
         const directory = dirname(resource.path);

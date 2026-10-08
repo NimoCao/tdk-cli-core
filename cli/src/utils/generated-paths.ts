@@ -1,7 +1,9 @@
 // Copyright (c) 2026 TDK Landscape contributors
 // SPDX-License-Identifier: MIT
+
 import { existsSync, lstatSync } from "node:fs";
 import { isAbsolute, normalize, relative, sep } from "node:path";
+import { TILTIGNORE_FILE } from "./constants.js";
 
 /** Reviewed TDK-owned destinations written by `tdk config regenerate` or Tilt generation. */
 export const TDK_GENERATED_PATH_ALLOWLIST = [
@@ -9,7 +11,7 @@ export const TDK_GENERATED_PATH_ALLOWLIST = [
   ".tdk/.tdk-out/**",
   "Tiltfile",
   "TILT_*.star",
-  ".tiltignore",
+  TILTIGNORE_FILE,
   "package.json (create only)",
   "shared-platform-engineering/docker-templates/**",
   "services/platform/database-management/docker-compose.yml",
@@ -33,7 +35,7 @@ export function isTdkGeneratedPath(path: string): boolean {
   return (
     normalized === "Tiltfile" ||
     /^TILT_[^/]+\.star$/.test(normalized) ||
-    normalized === ".tiltignore" ||
+    normalized === TILTIGNORE_FILE ||
     normalized === "package.json" ||
     normalized === "services/platform/database-management/docker-compose.yml"
   );
