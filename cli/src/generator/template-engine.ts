@@ -64,7 +64,7 @@ let embeddedTemplatesCache: Record<string, string> | null = null;
 function getEmbeddedTemplates(): Record<string, string> {
   if (!embeddedTemplatesCache) {
     embeddedTemplatesCache = {
-      TILTIGNORE_FILE: loadTemplate(".tiltignore.hbs"),
+      [TILTIGNORE_FILE]: loadTemplate(".tiltignore.hbs"),
       "TILT_RESOURCE_DEFAULTS.star": loadTemplate("TILT_RESOURCE_DEFAULTS.star.hbs"),
       "TILT_TECH_STACK.star": loadTemplate("TILT_TECH_STACK.star.hbs"),
       Tiltfile: loadTemplate("Tiltfile.hbs"),
