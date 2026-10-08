@@ -24,7 +24,11 @@ function segmentMatches(pattern: string, name: string): boolean {
   let starP = -1;
   let starN = 0;
   while (n < name.length) {
-    if (p < pattern.length && pattern[p] !== "*" && (pattern[p] === "?" || pattern[p] === name[n])) {
+    if (
+      p < pattern.length &&
+      pattern[p] !== "*" &&
+      (pattern[p] === "?" || pattern[p] === name[n])
+    ) {
       p++;
       n++;
     } else if (p < pattern.length && pattern[p] === "*") {

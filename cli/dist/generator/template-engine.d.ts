@@ -38,6 +38,7 @@ type GeneratedFileName = (typeof ALL_GENERATED_FILES)[number];
 export declare class TemplateEngine {
     private templatesDir;
     constructor(templatesDir?: string);
+    private quoteStarlarkString;
     private formatStarlarkValue;
     private registerHelpers;
     buildContext(projectConfig: ProjectConfig): GeneratorContext;

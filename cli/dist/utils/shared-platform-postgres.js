@@ -40,7 +40,7 @@ function readTextIfExists(path) {
     }
 }
 function parseStarlarkStringList(source, name) {
-    const re = new RegExp(`${name}\\s*=\\s*\\[([^\\]]*)\\]`);
+    const re = new RegExp(`${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*=\\s*\\[([^\\]]*)\\]`);
     const m = source.match(re);
     if (!m)
         return undefined;

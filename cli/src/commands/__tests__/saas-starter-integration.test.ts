@@ -36,7 +36,9 @@ function runCli(cwd: string, args: string[], env: Record<string, string> = {}): 
     timeout: 120_000,
   });
   if (result.status !== 0) {
-    throw new Error(`tdk ${args.join(" ")} failed in ${cwd} (exit ${result.status}):\n${result.stderr}`);
+    throw new Error(
+      `tdk ${args.join(" ")} failed in ${cwd} (exit ${result.status}):\n${result.stderr}`,
+    );
   }
   return result.stdout;
 }
