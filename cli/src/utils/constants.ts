@@ -7,6 +7,12 @@ import type { ResourceType } from "../types/index.js";
 // constant instead of a bare string literal.
 export const CONTAINER_RUNTIME_CHECK = "Container Runtime";
 
+// Root .tiltignore written by the generator and checked by doctor drift.
+export const TILTIGNORE_FILE = ".tiltignore";
+
+// Manifest file name for a resource, used by discovery and the resource command.
+export const SERVICE_JSON = "service.json";
+
 export const MASTER_CONFIG_FILES = [
   "TILT_TECH_STACK.star",
   "TILT_RESOURCE_DEFAULTS.star",

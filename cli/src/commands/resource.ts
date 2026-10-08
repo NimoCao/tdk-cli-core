@@ -1,5 +1,6 @@
 // Copyright (c) 2026 TDK Landscape contributors
 // SPDX-License-Identifier: MIT
+
 import { existsSync, mkdirSync } from "node:fs";
 import { isAbsolute, relative, resolve } from "node:path";
 import chalk from "chalk";
@@ -18,7 +19,6 @@ import {
   getTestTemplate,
   getWorkerIndexTemplate,
 } from "../generator/resource-templates.js";
-
 import type {
   CreatableResourceType,
   FileGenerationTask,
@@ -27,6 +27,7 @@ import type {
 } from "../types/index.js";
 import { CREATABLE_RESOURCE_TYPES } from "../types/index.js";
 import { assertValid, confirmOrCancel } from "../utils/command-helpers.js";
+import { SERVICE_JSON } from "../utils/constants.js";
 import {
   chooseResourcePath,
   isPathDiscovered,
@@ -582,7 +583,7 @@ export const resourceCommand = new Command("resource")
 
       // Check if resource already exists
       const isExistingResource = existsSync(fullPath);
-      const hasServiceJson = existsSync(resolve(fullPath, "service.json"));
+      const hasServiceJson = existsSync(resolve(fullPath, SERVICE_JSON));
 
       if (resourceType === "sdk" && !hasServiceJson) {
         throw new TdkError(`No service.json in ${finalResourcePath}`, [
@@ -649,7 +650,7 @@ export const resourceCommand = new Command("resource")
       if (shouldRegisterExisting && hasServiceJson) {
         // Read existing service.json
         const { readFileSync } = await import("node:fs");
-        const existingServiceJsonPath = resolve(fullPath, "service.json");
+        const existingServiceJsonPath = resolve(fullPath, SERVICE_JSON);
         const existingContent = readFileSync(existingServiceJsonPath, "utf-8");
         const existingServiceJson = JSON.parse(existingContent);
 
@@ -705,7 +706,7 @@ export const resourceCommand = new Command("resource")
         });
 
         const { writeFileSync } = await import("node:fs");
-        writeFileSync(resolve(fullPath, "service.json"), JSON.stringify(byoServiceJson, null, 2));
+        writeFileSync(resolve(fullPath, SERVICE_JSON), JSON.stringify(byoServiceJson, null, 2));
 
         // Create Dockerfile stub if no image provided and dockerfile doesn't exist
         if (!options.image && !existsSync(dockerfilePath)) {
@@ -799,7 +800,7 @@ This file contains the resource configuration for TDK.
       const tasks: FileGenerationTask[] = [
         {
           type: "json",
-          filename: "service.json",
+          filename: SERVICE_JSON,
           content: serviceJson,
           description: "Generating service.json",
           emoji: "📝",
@@ -888,7 +889,7 @@ This file contains the resource configuration for TDK.
         const owned = new Set(languageFiles.map((file) => file.filename));
         const sharedTasks = tasks.filter(
           (task) =>
-            task.filename === "service.json" ||
+            task.filename === SERVICE_JSON ||
             !(
               owned.has(task.filename) ||
               task.filename === "Dockerfile" ||
@@ -935,7 +936,7 @@ This file contains the resource configuration for TDK.
         writeFilesWithProgress(migratorPath, [
           {
             type: "json",
-            filename: "service.json",
+            filename: SERVICE_JSON,
             content: migratorConfig,
             description: "Generating Prisma migrator manifest",
             emoji: "🗃️",
