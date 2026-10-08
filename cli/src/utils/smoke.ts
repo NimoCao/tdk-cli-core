@@ -1,8 +1,10 @@
 // Copyright (c) 2026 TDK Landscape contributors
 // SPDX-License-Identifier: MIT
+
 import { copyFileSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { DiscoveredResource } from "../types/index.js";
+import { BRING_YOUR_OWN_TYPE } from "./constants.js";
 import { isApiServiceType } from "./resource-kind.js";
 import { resolveServicePath, resolveSubdomainBases } from "./service-urls.js";
 
@@ -151,13 +153,13 @@ export function buildSmokePlans(
     const config = resource.config;
     if (!config?.smoke) continue;
     const appType = config.appType;
-    const isApi = isApiServiceType(appType) || appType === "bring-your-own";
+    const isApi = isApiServiceType(appType) || appType === BRING_YOUR_OWN_TYPE;
     if (!isApi && appType !== "frontend") continue;
     if (config.exposeViaProxy === false) continue;
     const base = isApi ? apiBase : appBase;
     // The container healthcheck path (default /health for APIs) is the one request that is safe to repeat while the route comes up.
     const readyPath =
-      config.healthCheckPath || (isApi && appType !== "bring-your-own" ? "/health" : undefined);
+      config.healthCheckPath || (isApi && appType !== BRING_YOUR_OWN_TYPE ? "/health" : undefined);
     plans.push({
       name: resource.name,
       baseUrl: `${base}${resolveServicePath(resource).replace(/\/+$/, "")}`,

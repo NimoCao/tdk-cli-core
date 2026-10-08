@@ -1,7 +1,9 @@
 // Copyright (c) 2026 TDK Landscape contributors
 // SPDX-License-Identifier: MIT
+
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { DATABASE_MANAGEMENT_FEATURE } from "./constants.js";
 import { DEFAULT_ALWAYS_ENABLED_INFRA } from "./project-config-defaults.js";
 import { discoverResourcesFromRoot } from "./services.js";
 
@@ -20,7 +22,7 @@ import { discoverResourcesFromRoot } from "./services.js";
  * Spec: openspec/changes/dependson-starts-platform-postgres
  */
 
-export const POSTGRES_DEPENDENCY_NAMES = ["postgres", "database-management"] as const;
+export const POSTGRES_DEPENDENCY_NAMES = ["postgres", DATABASE_MANAGEMENT_FEATURE] as const;
 
 const PHASE_KEYS = ["pre_alpha", "alpha", "beta", "out_of_scope"] as const;
 
@@ -107,7 +109,7 @@ function specMasterHasDatabaseManagement(projectRoot: string): boolean | undefin
   const path = join(projectRoot, ".tdk", ".tdk-out", "spec.master");
   const text = readTextIfExists(path);
   if (text === undefined) return undefined;
-  // PRE_ALPHA/DEFAULTS style: "database-management": True
+  // PRE_ALPHA/DEFAULTS style: DATABASE_MANAGEMENT_FEATURE: True
   return /"database-management"\s*:\s*True/.test(text);
 }
 
@@ -143,13 +145,13 @@ function projectJsonFeatureOn(projectRoot: string): boolean {
   const phases = (parsed.phases ?? {}) as ProjectJsonPhases;
   for (const phase of PHASE_KEYS) {
     const stacks = phases[phase]?.enabledStacks;
-    if (Array.isArray(stacks) && stacks.includes("database-management")) {
+    if (Array.isArray(stacks) && stacks.includes(DATABASE_MANAGEMENT_FEATURE)) {
       return true;
     }
   }
 
   const alwaysEnabled = parsed.always_enabled_infra ?? DEFAULT_ALWAYS_ENABLED_INFRA;
-  return Array.isArray(alwaysEnabled) && alwaysEnabled.includes("database-management");
+  return Array.isArray(alwaysEnabled) && alwaysEnabled.includes(DATABASE_MANAGEMENT_FEATURE);
 }
 
 /**
@@ -159,7 +161,7 @@ function projectJsonFeatureOn(projectRoot: string): boolean {
 export function databaseManagementEnabled(projectRoot: string): boolean {
   if (projectJsonFeatureOn(projectRoot)) return true;
   const fromTilt = tiltfileAlwaysEnabledInfra(projectRoot);
-  if (Array.isArray(fromTilt) && fromTilt.includes("database-management")) return true;
+  if (Array.isArray(fromTilt) && fromTilt.includes(DATABASE_MANAGEMENT_FEATURE)) return true;
   if (specMasterHasDatabaseManagement(projectRoot) === true) return true;
   return false;
 }
@@ -210,7 +212,8 @@ export function evaluateSharedPlatformPostgres(
 ): SharedPlatformPostgresEvaluation {
   const featureOnFromProjectJson = projectJsonFeatureOn(projectRoot);
   const fromTilt = tiltfileAlwaysEnabledInfra(projectRoot);
-  const featureOnFromTiltfile = Array.isArray(fromTilt) && fromTilt.includes("database-management");
+  const featureOnFromTiltfile =
+    Array.isArray(fromTilt) && fromTilt.includes(DATABASE_MANAGEMENT_FEATURE);
   const featureOnFromSpecMaster = specMasterHasDatabaseManagement(projectRoot) === true;
   const featureOn = featureOnFromProjectJson || featureOnFromTiltfile || featureOnFromSpecMaster;
   const focusWouldEnableDatabaseManagement =

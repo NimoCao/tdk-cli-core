@@ -1,10 +1,12 @@
 // Copyright (c) 2026 TDK Landscape contributors
 // SPDX-License-Identifier: MIT
+
 import { execFileSync, execSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { basename, dirname, join, relative } from "node:path";
 import { BACKEND_LANGUAGES } from "../backend-languages/registry.js";
 import type { CheckResult, DiscoveredResource } from "../types/index.js";
+import { BRING_YOUR_OWN_TYPE, DATABASE_MANAGEMENT_FEATURE } from "./constants.js";
 import { type ExecAsync, execAsync } from "./exec-async.js";
 import { formatCount } from "./formatting.js";
 import { findProjectRoot } from "./paths.js";
@@ -149,7 +151,7 @@ export function checkPrismaConsistency(
     const appType = resource.config?.appType ?? resource.type;
     if (appType === "migrator") {
       const postgresDependency = resource.config?.dependsOn?.some(
-        (name) => name === "postgres" || name === "database-management",
+        (name) => name === "postgres" || name === DATABASE_MANAGEMENT_FEATURE,
       );
       if (!postgresDependency)
         findings.push(`${resource.name}: migrator must depend on postgres or database-management`);
@@ -221,7 +223,7 @@ function ownsRuntimeFiles(resource: DiscoveredResource): boolean {
  * (or its `buildContext`), or pulls `image`, and never generates the golden-layer Dockerfile that COPYs a package.json.
  */
 function isBringYourOwn(resource: DiscoveredResource): boolean {
-  return (resource.config?.appType ?? resource.type) === "bring-your-own";
+  return (resource.config?.appType ?? resource.type) === BRING_YOUR_OWN_TYPE;
 }
 
 export function checkResourcePackageJson(
@@ -286,7 +288,7 @@ export function checkDuplicateResourceNames(
 function isRoutedToPort(resource: DiscoveredResource): boolean {
   const appType = resource.config?.appType;
   if (isApiServiceType(appType)) return true;
-  return appType === "bring-your-own" && resource.config?.exposeViaProxy !== false;
+  return appType === BRING_YOUR_OWN_TYPE && resource.config?.exposeViaProxy !== false;
 }
 
 /**
@@ -410,7 +412,7 @@ export function checkSharedStackRoutes(
     const config = resource.config;
     const routable =
       isApiServiceType(config?.appType) ||
-      (config?.appType === "bring-your-own" && config.exposeViaProxy !== false);
+      (config?.appType === BRING_YOUR_OWN_TYPE && config.exposeViaProxy !== false);
     if (!routable) continue;
     const directory = dirname(resource.path);
     const stack = config?.stack ?? basename(directory);

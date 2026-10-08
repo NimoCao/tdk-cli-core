@@ -11,6 +11,7 @@
  */
 
 import type { ResourceType as ImportResourceType } from "../types/index.js";
+import { BRING_YOUR_OWN_TYPE } from "./constants.js";
 
 // Re-export the ResourceType from types/index to avoid conflicts
 export type ResourceType = ImportResourceType;
@@ -200,7 +201,7 @@ export const RESOURCE_FEATURES: Record<string, ResourceFeature> = {
  */
 export function getDefaultFeaturesForResourceType(appType: ResourceType): string[] {
   // bring-your-own doesn't generate application code, so no features
-  if (appType === "bring-your-own") {
+  if (appType === BRING_YOUR_OWN_TYPE) {
     return [];
   }
 

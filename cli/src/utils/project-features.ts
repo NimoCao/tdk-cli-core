@@ -1,5 +1,6 @@
 // Copyright (c) 2026 TDK Landscape contributors
 // SPDX-License-Identifier: MIT
+import { DATABASE_MANAGEMENT_FEATURE } from "./constants.js";
 /**
  * Project-Level Features
  *
@@ -46,8 +47,8 @@ export const PROJECT_FEATURES: Record<string, ProjectFeature> = {
     dependsOn: [],
   },
 
-  "database-management": {
-    name: "database-management",
+  DATABASE_MANAGEMENT_FEATURE: {
+    name: DATABASE_MANAGEMENT_FEATURE,
     description: "PostgreSQL database for data persistence and SQL operations",
     category: "core",
     phase: "pre_alpha",
@@ -64,7 +65,7 @@ export const PROJECT_FEATURES: Record<string, ProjectFeature> = {
     category: "optional",
     phase: "pre_alpha",
     enabled_by_default: false,
-    dependsOn: ["database-management"],
+    dependsOn: [DATABASE_MANAGEMENT_FEATURE],
   },
 
   elk: {
@@ -82,7 +83,7 @@ export const PROJECT_FEATURES: Record<string, ProjectFeature> = {
     category: "optional",
     phase: "pre_alpha",
     enabled_by_default: false,
-    dependsOn: ["database-management"],
+    dependsOn: [DATABASE_MANAGEMENT_FEATURE],
   },
 
   "golden-image": {
