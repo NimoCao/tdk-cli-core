@@ -1,8 +1,8 @@
 name: 🏷️ PR area labels
 
 on:
-  pull_request_target:
-    types: [opened, synchronize, reopened]
+  pull_request_target: # zizmor: ignore[dangerous-triggers] never checks out or runs PR code; only reads the changed-file list and PR metadata, then writes labels and review requests
+    types: [opened, synchronize, reopened, labeled]
 
 permissions:
   contents: read
@@ -15,7 +15,57 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
+      # Not on `labeled`: with sync-labels the labeler would strip a tech label someone
+      # added by hand to a PR whose paths don't match it.
       - name: Apply matching area labels
+        if: github.event.action != 'labeled'
         uses: actions/labeler@bf12e9b00b37c5c0ca2b87b79b2daf7891dbda13 # v7
         with:
           sync-labels: true
+
+      # Labels applied by the labeler above use GITHUB_TOKEN, which does not trigger a
+      # separate `labeled` workflow, so the reviewer request lives here. It fires only when
+      # a watched label was just added: by a person (`labeled`), or by the labeler in this
+      # run (in the PR's labels now but not in the event payload's labels from before).
+      - name: Request reviewer for JavaScript and TypeScript PRs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          EVENT_ACTION: ${{ github.event.action }}
+          EVENT_LABEL: ${{ github.event.label.name }}
+          LABELS_BEFORE: ${{ toJSON(github.event.pull_request.labels.*.name) }}
+          REVIEWER: sb123sb123
+          WATCHED_LABELS: '["tech: javascript", "tech: typescript"]'
+        run: |
+          pr=$(gh api "repos/$REPO/pulls/$PR_NUMBER")
+
+          if [ "$EVENT_ACTION" = "labeled" ]; then
+            added=$(jq -cn --arg l "$EVENT_LABEL" '[$l]')
+          else
+            added=$(jq -c --argjson before "$LABELS_BEFORE" '[.labels[].name] - $before' <<< "$pr")
+          fi
+
+          matched=$(jq -cn --argjson added "$added" --argjson watched "$WATCHED_LABELS" \
+            '[$added[] | select(. as $l | $watched | index($l))]')
+          if [ "$matched" = "[]" ]; then
+            echo "No JavaScript/TypeScript label was added (added: $added); nothing to do."
+            exit 0
+          fi
+
+          if [ "$(jq -r --arg u "$REVIEWER" '.user.login == $u' <<< "$pr")" = "true" ]; then
+            echo "$REVIEWER is the PR author; cannot request them as reviewer."
+            exit 0
+          fi
+
+          if [ "$(jq -r --arg u "$REVIEWER" '[.requested_reviewers[].login] | index($u) != null' <<< "$pr")" = "true" ]; then
+            echo "$REVIEWER is already requested as a reviewer."
+            exit 0
+          fi
+
+          # A failed request (e.g. the reviewer lost repo access) should not turn the labeling check red.
+          if gh api --method POST "repos/$REPO/pulls/$PR_NUMBER/requested_reviewers" -f "reviewers[]=$REVIEWER" > /dev/null; then
+            echo "Requested review from $REVIEWER for $matched."
+          else
+            echo "::warning::Could not request review from $REVIEWER; check they still have access to $REPO."
+          fi
