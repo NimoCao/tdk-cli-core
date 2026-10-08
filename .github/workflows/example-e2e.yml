@@ -54,7 +54,7 @@ jobs:
 
       - name: Pack and install the candidate TDK package
         run: | # zizmor: ignore[adhoc-packages] installs our own freshly packed tarball
-          tarball="$(npm pack --ignore-scripts --silent | tail -1)"
+          tarball="$(npm pack --silent | tail -1)"
           npm install --global "./$tarball"
 
       - name: Clone and configure the bundled example

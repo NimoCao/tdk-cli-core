@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
@@ -26,7 +27,12 @@ if (nodeTooOld(process.versions.node)) {
   process.exit(1);
 }
 
-const cliPath = join(__dirname, "..", "dist", "cli.js");
+// dist-bundle/ (ink/react/chalk inlined) exists only in a packed npm package;
+// a git checkout runs the committed dist/ instead.
+const bundledCliPath = join(__dirname, "..", "dist-bundle", "cli.js");
+const cliPath = existsSync(bundledCliPath)
+  ? bundledCliPath
+  : join(__dirname, "..", "dist", "cli.js");
 
 import(pathToFileURL(cliPath).href).catch((err) => {
   console.error("Failed to start TDK:", err);

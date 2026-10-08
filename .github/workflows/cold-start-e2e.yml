@@ -88,7 +88,9 @@ jobs:
           TDK_VERSION: ${{ steps.version.outputs.version }}
         run: | # zizmor: ignore[adhoc-packages] the scenario tests the locally packed CLI or a selected published release
           if [ "$TDK_VERSION" = "local" ]; then
-            tarball="$(npm pack --ignore-scripts --silent | tail -1)"
+            # prepack bundles dist with esbuild (a devDependency)
+            bun install --frozen-lockfile
+            tarball="$(npm pack --silent | tail -1)"
             npm install -g "./$tarball"
           else
             if [ "$TDK_VERSION" != "latest" ]; then

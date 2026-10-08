@@ -115,7 +115,9 @@ jobs:
           if [ "$TDK_VERSION" = "local" ]; then
             # The tarball users would get from npm, built from this checkout
             # (cli/dist is committed and CI keeps it in sync).
-            tarball="$(npm pack --ignore-scripts --silent | tail -1)"
+            # prepack bundles dist with esbuild (a devDependency)
+            bun install --frozen-lockfile
+            tarball="$(npm pack --silent | tail -1)"
             npm install -g "./$tarball"
             tdk --version
             exit 0

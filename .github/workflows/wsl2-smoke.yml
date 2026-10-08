@@ -78,7 +78,7 @@ jobs:
           cd /root/tdk-ci
           bun install --frozen-lockfile
           npm run build
-          tarball="$(npm pack --ignore-scripts --silent | tail -1)"
+          tarball="$(npm pack --silent | tail -1)"
           npm install --global "./$tarball"
           tdk --version | tee -a /root/tdk-evidence/environment.log
 

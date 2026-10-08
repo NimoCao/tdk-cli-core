@@ -53,7 +53,7 @@ jobs:
         run: | # zizmor: ignore[adhoc-packages] installs our own freshly packed tarball
           bun install --frozen-lockfile
           npm run build
-          tarball="$(npm pack --ignore-scripts --silent | tail -1)"
+          tarball="$(npm pack --silent | tail -1)"
           npm install --global "./$tarball"
 
       - name: Configure the example

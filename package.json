@@ -30,6 +30,7 @@
     "examples/tdk-example",
     "cli/bin",
     "cli/dist/**/*.js",
+    "cli/dist-bundle/**/*.js",
     "cli/templates",
     "cli/package.json",
     "cli/shared-platform-engineering/docker-templates",
@@ -45,6 +46,8 @@
     "clean": "cd cli && npm run clean",
     "release:binaries": "scripts/release-binaries.sh",
     "release:binaries:publish": "scripts/release-binaries.sh --publish",
+    "prepack": "node cli/scripts/bundle.mjs",
+    "postpack": "rm -rf cli/dist-bundle",
     "prepare": "scripts/install-git-hooks.sh",
     "cli": "cd cli && node bin/tdk.js",
     "tdk": "cd cli && node bin/tdk.js"
@@ -68,13 +71,13 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "chalk": "^6.0.1",
     "commander": "^15.0.0",
-    "handlebars": "^4.7.8",
-    "ink": "^7.1.1",
-    "react": "^19.3.0"
+    "handlebars": "^4.7.8"
   },
   "devDependencies": {
+    "chalk": "^6.0.1",
+    "ink": "^7.1.1",
+    "react": "^19.3.0",
     "@types/node": "^22.0.0",
     "knip": "^6.38.0"
   },
