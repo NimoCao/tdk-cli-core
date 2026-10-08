@@ -1,5 +1,5 @@
 # A real cookiecutter-django project (no Docker, no Celery, no mail catcher): the generator runs at build time.
-FROM python:3.12
+FROM python:3.12@sha256:63828510c8b5ccce3bf0d6fabd6f3d17d4effa1ffe690f80a67c8e2d394e03ee
 ENV PYTHONUNBUFFERED=1
 COPY --from=ghcr.io/astral-sh/uv:0.9.26 /uv /uvx /bin/
 RUN pip install --no-cache-dir cookiecutter

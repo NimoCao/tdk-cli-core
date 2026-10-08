@@ -1,5 +1,5 @@
 # A real loco app (no database, async background workers, no assets): the scaffolder runs at build time.
-FROM rust:1-slim-bookworm AS build
+FROM rust:1-slim-bookworm@sha256:2c3a22f0a5533ea2dd5a16627bc841228151faa2d4de2644ac9987e4a2f1f2fa AS build
 RUN apt-get update -qq && apt-get install -y -qq pkg-config libssl-dev git && rm -rf /var/lib/apt/lists/*
 RUN cargo install loco
 WORKDIR /work
@@ -7,7 +7,7 @@ RUN loco new --name app --path /work --db none --bg async --assets none --allow-
 WORKDIR /work/app
 RUN cargo build --release
 
-FROM debian:bookworm-slim
+FROM debian:bookworm-slim@sha256:7c7b2c966bc9ee8cedfeef67e0e279108992c77681fa595db4a9d65c06ccc587
 RUN apt-get update -qq && apt-get install -y -qq libssl3 ca-certificates && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY --from=build /work/app/target/release/app-cli /app/app-cli

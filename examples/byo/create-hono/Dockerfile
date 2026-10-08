@@ -1,5 +1,5 @@
 # A real Hono app from `create-hono` (Bun template): the scaffolder runs at build time.
-FROM oven/bun:1
+FROM oven/bun:1@sha256:9114c058aeae42162ee16dd5084b95fe9473970bb6bcb5b232ab1630f0546895
 WORKDIR /work
 RUN bun create hono@latest app --template bun --install --pm bun
 WORKDIR /work/app

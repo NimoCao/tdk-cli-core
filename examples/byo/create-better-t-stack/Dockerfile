@@ -1,5 +1,5 @@
 # A real create-better-t-stack monorepo (web + server, no database): the scaffolder runs at build time.
-FROM node:22-alpine
+FROM node:22-alpine@sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402
 # The scaffolder and its generated workspaces need npm >= 11.16.
 RUN npm install -g npm@latest
 WORKDIR /work

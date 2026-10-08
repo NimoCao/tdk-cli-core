@@ -7,7 +7,7 @@
 # documented `tilt trigger` command rather than depending on Tilt's
 # undocumented internal HTTP API).
 
-FROM oven/bun:1.3.11-alpine AS base
+FROM oven/bun:1.3.11-alpine@sha256:7ed9f74c326d1c260abe247ac423ccbf5ac92af62bb442d515d1f92f21e8ea9b AS base
 
 # Pin to the same Tilt version this workspace runs (v0.37.7) so `tilt trigger`
 # talks the same protocol as the real daemon it's connecting to. Installed
