@@ -38,6 +38,20 @@ describe("discovery paths", () => {
     expect(isPathDiscovered(root, "services/shop", patterns)).toBe(false);
   });
 
+  it("treats regex metacharacters in a pattern as literal text", () => {
+    expect(isPathDiscovered(root, "apps/a+b", ["apps/a+b"])).toBe(true);
+    expect(isPathDiscovered(root, "apps/aab", ["apps/a+b"])).toBe(false);
+    expect(isPathDiscovered(root, "apps/a.b", ["apps/a.b"])).toBe(true);
+    expect(isPathDiscovered(root, "apps/axb", ["apps/a.b"])).toBe(false);
+  });
+
+  it("matches hostile wildcard patterns quickly without backtracking blow-up", () => {
+    const hostile = "a*".repeat(30) + "b";
+    const started = Date.now();
+    expect(isPathDiscovered(root, `apps/${"a".repeat(5000)}`, [`apps/${hostile}`])).toBe(false);
+    expect(Date.now() - started).toBeLessThan(1000);
+  });
+
   it("supports literal, wildcard and multiple patterns", () => {
     expect(isPathDiscovered(root, "apps/storefront", ["apps/*"])).toBe(true);
     expect(isPathDiscovered(root, "apps/storefront", ["services/*/*", "apps"])).toBe(true);
