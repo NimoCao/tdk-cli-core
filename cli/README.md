@@ -142,7 +142,18 @@ must pass `--stack`. Without `--yes`, prompt answers can still be supplied on st
 
 `service.json` files point to the published [JSON Schema](https://tdk-landscape.github.io/schema.service.json) for editor autocomplete and validation. The schema source is [`engine/schemas/service-schema.json`](../engine/schemas/service-schema.json); it documents supported service fields and known `featuresEnabled` names. Legacy manifests may use `type` in place of `appType`.
 
-Backend creation defaults to Bun + Hono, exactly as it always has: omit `--language` and nothing changes. Use `--language python` for FastAPI on Python 3.12, `--language go` for a standard-library `net/http` service on Go 1.23, or `--language rust` for an axum service (neither has live reload: Tilt rebuilds the image on change). The selected id is saved as `language` in `service.json`; a legacy manifest without it still means Bun and is never rewritten. The flag applies only to `--type backend`, and unknown ids fail before a resource is written. On the Bun runtime the HTTP framework is Hono by default; use `--framework express` for Express 5 `--framework elysia` for Elysia 1 or `--framework fastify` for Fastify 5 or `--framework nestjs` for NestJS 11 or `--framework koa` for Koa 3 or `--framework h3` for h3 1.x instead (saved as `framework` in `service.json`; `--framework hono` is accepted and saved too, and omitting it changes nothing). `--framework` cannot be combined with `--language python`, and unknown ids fail before a resource is written. Languages without a provider can use `--type bring-your-own`. See the [backend provider guide](../docs/backend-language-providers.md) and the runnable [Python example](../examples/one-backend-python/README.md).
+Backend creation defaults to Bun + Hono, exactly as it always has: omit `--language` and nothing changes. Use `--language python` for FastAPI on Python 3.12, `--language go` for a standard-library `net/http` service on Go 1.23, or `--language rust` for an axum service (Go and Rust have no live reload: Tilt rebuilds the image on change). The selected id is saved as `language` in `service.json`; a legacy manifest without it still means Bun and is never rewritten. The flag applies only to `--type backend`, and unknown ids fail before a resource is written. On the Bun runtime the HTTP framework is Hono by default. To use another, pass one of these to `--framework`:
+
+| Id | Framework |
+| --- | --- |
+| `express` | Express 5 |
+| `elysia` | Elysia 1 |
+| `fastify` | Fastify 5 |
+| `nestjs` | NestJS 11 |
+| `koa` | Koa 3 |
+| `h3` | h3 1.x |
+
+The selected id is saved as `framework` in `service.json`. `--framework hono` is accepted and saved too, and omitting it changes nothing. `--framework` cannot be combined with `--language python`, and unknown ids fail before a resource is written. Languages without a provider can use `--type bring-your-own`. See the [backend provider guide](../docs/backend-language-providers.md) and the runnable [Python example](../examples/one-backend-python/README.md).
 
 Frontend creation defaults to React. Use `--framework vue` for Vue 3, `--framework svelte` for Svelte 5, `--framework preact` for Preact 10, `--framework lit` for Lit 3, `--framework solid` for Solid 1, `--framework qwik` for Qwik 1, `--framework tanstack-router` for a React SPA with TanStack Router (client-side; TanStack Start SSR is a [bring-your-own](../docs/frontend-framework-providers.md#tanstack-start-ssr) app) or `--framework vanilla` for plain TypeScript with no UI framework; `--framework react` is also accepted. The selected id is saved in `service.json`. The flag applies only to frontend resources, and unknown ids fail before a resource is written. Existing frontend manifests without the field continue to use React. Run `tdk resource --frameworks` to list the registered ids, and an interactive terminal offers them as a picker (React first). Meta-frameworks that own their own server or build config (Next, Nuxt, SvelteKit, Astro, Angular, Remix, TanStack Start) are not Vite SPA providers: `--framework next` fails before anything is written and points to `tdk resource <name> --type bring-your-own`.
 
@@ -178,7 +189,7 @@ The frontend provider owns root `index.html` and starter source. After TDK gener
 | `tdk doctor` | 🔍 Print ranked cold-start failures first, then check environment (Docker, Bun, Tilt, ports) |
 | `tdk completion --install` | ⌨️ Install shell completions (`--shell bash\|zsh\|fish`) |
 | `tdk upgrade` | ⬆️ Self-update to the latest version (`--dry-run`, `--force`) |
-| `tdk version` | ℹ️  Show version |
+| `tdk version` | ℹ️ Show version |
 | `tdk --help` | ❓ Show help |
 
 `-v` is context-specific: `tdk -v` prints the version, while `tdk up -v` and `tdk down -v`
