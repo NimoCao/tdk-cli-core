@@ -49,7 +49,7 @@ def generate_frontend_api_client(manifest, write_fn=None):
 // Source: engine/topologies/tilt/resources/orchestrator/generators/frontend.star
 // Purpose: Pre-configured API client for {stack} resource
 
-import {{ createApiClient }} from '@" + _NPM_SCOPE + "'/platform-api-client';
+import {{ createApiClient }} from '@{npm_scope}/platform-api-client';
 
 /**
  * Pre-configured API client for {stack} resource
@@ -68,6 +68,7 @@ export const apiClient = createApiClient({{
 export default apiClient;
 '''.format(
         stack=stack,
+        npm_scope=_NPM_SCOPE,
         api_path=api_path,
         local_domain=PlatformDockerConstants.API_LOCAL_DOMAIN,
     )

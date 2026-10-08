@@ -22,6 +22,10 @@ def _load_npm_scope():
 
 _NPM_SCOPE = _load_npm_scope()
 
+def _with_npm_scope(template):
+    # Fill in the scope here so callers' .format() calls need no extra argument; '{npm_scope}' is not a .format() field afterwards.
+    return template.replace('{npm_scope}', _NPM_SCOPE)
+
 TEMPLATE_VITE_BACKEND_WITH_NODE = """{header}
 import path from 'node:path';
 import {{ VitePluginNode }} from 'vite-plugin-node';
@@ -135,7 +139,7 @@ export default defineConfig({{
 }});
 """
 
-TEMPLATE_VITE_LIBRARY = """{header}
+TEMPLATE_VITE_LIBRARY = _with_npm_scope("""{header}
 import {{ resolve }} from 'node:path';
 {plugin_imports}
 import {{ defineConfig }} from 'vitest/config';
@@ -164,7 +168,7 @@ export default defineConfig({{
     rollupOptions: {{
       external: [
         /^node:.*/,
-        /^@" + _NPM_SCOPE + "\\/.*$/,
+        /^@{npm_scope}\\/.*$/,
         'react',
         'react-dom',
         'react/jsx-runtime',
@@ -223,7 +227,7 @@ export default defineConfig({{
     include: ['src/**/*.{{test,spec}}.{{ts,tsx}}'],
   }},
 }});
-"""
+""")
 
 TEMPLATE_VITE_SDK = """{header}
 import {{ federation }} from '@module-federation/vite';
@@ -261,7 +265,7 @@ export default defineConfig({{
 # Environment-Specific Library Templates
 # =============================================================================
 
-TEMPLATE_VITE_LIBRARY_DEV = """{header}
+TEMPLATE_VITE_LIBRARY_DEV = _with_npm_scope("""{header}
 import {{ resolve }} from 'node:path';
 {plugin_imports}
 import {{ defineConfig }} from 'vitest/config';
@@ -284,7 +288,7 @@ export default defineConfig({{
     rollupOptions: {{
       external: [
         /^node:.*/,
-        /^@" + _NPM_SCOPE + "\\/.*$/,
+        /^@{npm_scope}\\/.*$/,
         'react',
         'react-dom',
         'react/jsx-runtime',
@@ -341,9 +345,9 @@ export default defineConfig({{
     include: ['src/**/*.{{test,spec}}.{{ts,tsx}}'],
   }},
 }});
-"""
+""")
 
-TEMPLATE_VITE_LIBRARY_PROD = """{header}
+TEMPLATE_VITE_LIBRARY_PROD = _with_npm_scope("""{header}
 import {{ resolve }} from 'node:path';
 {plugin_imports}
 import {{ defineConfig }} from 'vitest/config';
@@ -372,7 +376,7 @@ export default defineConfig({{
     rollupOptions: {{
       external: [
         /^node:.*/,
-        /^@" + _NPM_SCOPE + "\\/.*$/,
+        /^@{npm_scope}\\/.*$/,
         'react',
         'react-dom',
         'react/jsx-runtime',
@@ -430,7 +434,7 @@ export default defineConfig({{
     include: ['src/**/*.{{test,spec}}.{{ts,tsx}}'],
   }},
 }});
-"""
+""")
 
 # =============================================================================
 # Template Generation Functions
