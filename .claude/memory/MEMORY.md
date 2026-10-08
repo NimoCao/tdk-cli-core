@@ -22,6 +22,8 @@ Hard-won, repo-specific facts for anyone (human or agent) working here. Keep ent
 - Test job limit was 1 minute until #407; a job "cancelled" at exactly the limit is a timeout, read the step log before rerunning. `wsl2-smoke` is manual-only since 2026-10-07 (workflow_dispatch; its job is skipped on PRs and pushes, which still satisfies the required check). It was flaky on `setup-wsl`'s hard-coded `wsl --update` 403 on windows-2022 and on apt/Docker mirrors (#716, #717).
 - Pinned hashes in `resource-backend-languages.test.ts` change when scaffold output changes; re-capture them on purpose and say why in the test comment.
 
+- 2026-10-08 (#873): A build tool used by a `prepack`/`build` script must be a declared devDependency of the package that runs it (`cli/`). A stray copy in `node_modules` from an earlier `bun add` hides the omission locally; CI's clean `bun install --frozen-lockfile` fails with `ERR_MODULE_NOT_FOUND`. Verify with `rm -rf node_modules cli/node_modules` and a frozen install before pushing.
+
 ## Engine and generators
 - A changed `.star` file reaches a running container only after re-vendoring (`tdk project --yes`), a Tiltfile content change, and an image rebuild. Byte-identical output logs `Skipping ... (no changes)`.
 - Check a BYO example through `tdk up` (`scripts/verify-byo-tdk.sh`), not only a standalone `docker run`: TDK adds a `Host: api.<project>.localhost` header, a Postgres `DATABASE_URL`, and its own bind expectations.
