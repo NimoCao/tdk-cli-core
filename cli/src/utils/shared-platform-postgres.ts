@@ -87,7 +87,9 @@ function parseStarlarkStringList(source: string, name: string): string[] | undef
       if (source[i] === "[") {
         const end = source.indexOf("]", i + 1);
         if (end === -1) return undefined;
-        return [...source.slice(i + 1, end).matchAll(/"([^"]+)"|'([^']+)'/g)].map((x) => x[1] ?? x[2] ?? "");
+        return [...source.slice(i + 1, end).matchAll(/"([^"]+)"|'([^']+)'/g)].map(
+          (x) => x[1] ?? x[2] ?? "",
+        );
       }
     }
     from = at + name.length;

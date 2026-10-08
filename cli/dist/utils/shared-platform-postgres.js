@@ -39,12 +39,31 @@ function readTextIfExists(path) {
         return undefined;
     }
 }
+// Finds `name = [ ... ]` and returns its quoted strings. Plain string scanning, not a RegExp built from the name.
 function parseStarlarkStringList(source, name) {
-    const re = new RegExp(`${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*=\\s*\\[([^\\]]*)\\]`);
-    const m = source.match(re);
-    if (!m)
-        return undefined;
-    return [...m[1].matchAll(/"([^"]+)"|'([^']+)'/g)].map((x) => x[1] ?? x[2] ?? "");
+    const skipSpaces = (at) => {
+        let i = at;
+        while (i < source.length && /\s/.test(source[i]))
+            i += 1;
+        return i;
+    };
+    let from = 0;
+    for (;;) {
+        const at = source.indexOf(name, from);
+        if (at === -1)
+            return undefined;
+        let i = skipSpaces(at + name.length);
+        if (source[i] === "=") {
+            i = skipSpaces(i + 1);
+            if (source[i] === "[") {
+                const end = source.indexOf("]", i + 1);
+                if (end === -1)
+                    return undefined;
+                return [...source.slice(i + 1, end).matchAll(/"([^"]+)"|'([^']+)'/g)].map((x) => x[1] ?? x[2] ?? "");
+            }
+        }
+        from = at + name.length;
+    }
 }
 function tiltfileAlwaysEnabledInfra(projectRoot) {
     const path = join(projectRoot, ".tdk", ".tdk-out", "Tiltfile");
