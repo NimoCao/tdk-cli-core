@@ -132,10 +132,11 @@ function hostLoad(): number {
   return Number.parseFloat(shOk("sysctl -n vm.loadavg").replace(/[{}]/g, "").trim().split(/\s+/)[0] ?? "0");
 }
 
+const escapeRegExp = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 function hostFreeMiB(): number {
   const out = shOk("vm_stat");
   const page = Number(out.match(/page size of (\d+)/)?.[1] ?? 16384);
-  const pages = (key: string) => Number(out.match(new RegExp(`${key}:\\s+(\\d+)`))?.[1] ?? 0);
+  const pages = (key: string) => Number(out.match(new RegExp(`${escapeRegExp(key)}:\\s+(\\d+)`))?.[1] ?? 0);
   return Math.round(((pages("Pages free") + pages("Pages speculative")) * page) / 1048576);
 }
 

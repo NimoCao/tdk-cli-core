@@ -1,7 +1,7 @@
 // Copyright (c) 2026 TDK Landscape contributors
 // SPDX-License-Identifier: MIT
-import { execSync, spawnSync } from "node:child_process";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { spawnSync } from "node:child_process";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -23,6 +23,22 @@ function writeTestEnvFile(starterRoot: string) {
     join(starterRoot, ".env"),
     "VERDACCIO_URL_DOCKER=http://verdaccio:4873\nTILT_ENV=dev\nDB_PASSWORD=test-password\n",
   );
+}
+
+// Runs the CLI with an argument array and the working directory set, so paths are never
+// spliced into a shell command string. Throws on a non-zero exit, like execSync did.
+function runCli(cwd: string, args: string[], env: Record<string, string> = {}): string {
+  const result = spawnSync("bun", [CLI_BIN_PATH, ...args], {
+    cwd,
+    encoding: "utf-8",
+    stdio: "pipe",
+    env: { ...process.env, ...env },
+    timeout: 120_000,
+  });
+  if (result.status !== 0) {
+    throw new Error(`tdk ${args.join(" ")} failed in ${cwd} (exit ${result.status}):\n${result.stderr}`);
+  }
+  return result.stdout;
 }
 
 // tdk-cli-extensions is a sibling checkout, not a dependency of this repo, so its
@@ -56,7 +72,7 @@ describe.skipIf(!EXTENSION_SOURCE_AVAILABLE)("saas-starter cloning and discovery
         testDir.includes("tdk-saas-test-") &&
         testDir.length > 20
       ) {
-        execSync(`rm -rf "${testDir}"`, { stdio: "pipe" });
+        rmSync(testDir, { recursive: true, force: true });
       }
     } catch {
       // cleanup best-effort
@@ -69,12 +85,9 @@ describe.skipIf(!EXTENSION_SOURCE_AVAILABLE)("saas-starter cloning and discovery
    */
   it("should clone saas-starter with valid file structure", () => {
     const cwd = testDir;
-    execSync(`mkdir -p "${cwd}"`, { stdio: "pipe" });
+    mkdirSync(cwd, { recursive: true });
 
-    const result = execSync(`cd "${cwd}" && bun "${CLI_BIN_PATH}" project saas --yes`, {
-      encoding: "utf-8",
-      stdio: "pipe",
-    });
+    const result = runCli(cwd, ["project", "saas", "--yes"]);
 
     expect(result).toContain("Cloned");
     expect(existsSync(join(cwd, "tdk-saas-starter", "services"))).toBe(true);
@@ -107,21 +120,16 @@ describe.skipIf(!EXTENSION_SOURCE_AVAILABLE)("saas-starter cloning and discovery
    */
   it("should auto-populate discovered services in project.json", () => {
     const cwd = testDir;
-    execSync(`mkdir -p "${cwd}"`, { stdio: "pipe" });
+    mkdirSync(cwd, { recursive: true });
 
     // Clone
-    execSync(`cd "${cwd}" && bun "${CLI_BIN_PATH}" project saas --yes`, {
-      stdio: "pipe",
-    });
+    runCli(cwd, ["project", "saas", "--yes"]);
 
     const starterRoot = join(cwd, "tdk-saas-starter");
     writeTestEnvFile(starterRoot);
 
     // Generate project config
-    execSync(
-      `cd "${starterRoot}" && TDK_EXTENSION_SOURCE="${EXTENSION_SOURCE}" bun "${CLI_BIN_PATH}" project --yes`,
-      { stdio: "pipe" },
-    );
+    runCli(starterRoot, ["project", "--yes"], { TDK_EXTENSION_SOURCE: EXTENSION_SOURCE });
 
     // Verify project.json has services populated
     const projectJsonPath = join(starterRoot, ".tdk", "project.json");
@@ -140,19 +148,14 @@ describe.skipIf(!EXTENSION_SOURCE_AVAILABLE)("saas-starter cloning and discovery
    */
   it("should generate spec.master with discovered services in PRE_ALPHA_RESOURCES", () => {
     const cwd = testDir;
-    execSync(`mkdir -p "${cwd}"`, { stdio: "pipe" });
+    mkdirSync(cwd, { recursive: true });
 
-    execSync(`cd "${cwd}" && bun ${CLI_BIN_PATH} project saas --yes`, {
-      stdio: "pipe",
-    });
+    runCli(cwd, ["project", "saas", "--yes"]);
 
     const starterRoot = join(cwd, "tdk-saas-starter");
     writeTestEnvFile(starterRoot);
 
-    execSync(
-      `cd "${starterRoot}" && TDK_EXTENSION_SOURCE="${EXTENSION_SOURCE}" bun ${CLI_BIN_PATH} project --yes`,
-      { stdio: "pipe" },
-    );
+    runCli(starterRoot, ["project", "--yes"], { TDK_EXTENSION_SOURCE: EXTENSION_SOURCE });
 
     const specPath = join(starterRoot, ".tdk", ".tdk-out", "spec.master");
     expect(existsSync(specPath)).toBe(true);
@@ -173,19 +176,14 @@ describe.skipIf(!EXTENSION_SOURCE_AVAILABLE)("saas-starter cloning and discovery
    */
   it("should pass doctor check after project init", () => {
     const cwd = testDir;
-    execSync(`mkdir -p "${cwd}"`, { stdio: "pipe" });
+    mkdirSync(cwd, { recursive: true });
 
-    execSync(`cd "${cwd}" && bun ${CLI_BIN_PATH} project saas --yes`, {
-      stdio: "pipe",
-    });
+    runCli(cwd, ["project", "saas", "--yes"]);
 
     const starterRoot = join(cwd, "tdk-saas-starter");
     writeTestEnvFile(starterRoot);
 
-    execSync(
-      `cd "${starterRoot}" && TDK_EXTENSION_SOURCE="${EXTENSION_SOURCE}" bun ${CLI_BIN_PATH} project --yes`,
-      { stdio: "pipe" },
-    );
+    runCli(starterRoot, ["project", "--yes"], { TDK_EXTENSION_SOURCE: EXTENSION_SOURCE });
 
     // Check the master-config result even if another local project occupies ingress ports.
     const doctorResult = spawnSync("bun", [CLI_BIN_PATH, "doctor"], {

@@ -8,9 +8,10 @@ import { describe, expect, it } from "vitest";
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
 const ci = readFileSync(join(repoRoot, ".github", "workflows", "ci.yml"), "utf-8");
 
+const escapeRegExp = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 /** The `timeout-minutes` of one top-level job in ci.yml, or undefined when it has none. */
 function jobTimeoutMinutes(job: string): number | undefined {
-  const start = ci.search(new RegExp(`^  ${job}:\\s*$`, "m"));
+  const start = ci.search(new RegExp(`^  ${escapeRegExp(job)}:\\s*$`, "m"));
   expect(start, `job ${job} not found in ci.yml`).toBeGreaterThanOrEqual(0);
   const rest = ci.slice(start + 1);
   const next = rest.search(/^ {2}[a-z0-9-]+:\s*$/m);
