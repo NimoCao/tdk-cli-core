@@ -5,5 +5,7 @@ WORKDIR /job
 # Prisma 6; Prisma 7 moved the datasource URL into prisma.config.ts.
 RUN npm install --no-audit --no-fund prisma@6
 COPY prisma ./prisma
+RUN chown -R node:node .
+USER node
 # TDK's DATABASE_URL is already Prisma-style (?schema=public), so it is used as is.
 CMD ["npx", "prisma", "migrate", "deploy"]

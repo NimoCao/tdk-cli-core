@@ -6,4 +6,6 @@ RUN npm install --no-audit --no-fund
 COPY mikro-orm.config.js ./
 COPY migrations ./migrations
 ENV MIKRO_ORM_CLI_CONFIG=./mikro-orm.config.js
+RUN chown -R node:node .
+USER node
 CMD ["npx", "mikro-orm", "migration:up"]

@@ -5,4 +5,6 @@ COPY package.json ./
 RUN npm install --no-audit --no-fund
 COPY data-source.js ensure-db.js ./
 COPY migrations ./migrations
+RUN chown -R node:node .
+USER node
 CMD ["sh", "-c", "node ensure-db.js && npx typeorm migration:run -d data-source.js"]

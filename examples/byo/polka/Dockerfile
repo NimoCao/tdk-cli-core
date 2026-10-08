@@ -5,5 +5,8 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install --omit=dev --no-audit --no-fund
 COPY server.js ./
+RUN chown -R node:node .
+USER node
+HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=3 CMD nc -z 127.0.0.1 ${PORT:-3000} || exit 1
 # server.js binds 0.0.0.0 and reads PORT, which TDK sets.
 CMD ["node", "server.js"]

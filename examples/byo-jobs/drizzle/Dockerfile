@@ -6,4 +6,6 @@ RUN npm install --no-audit --no-fund
 COPY schema.js drizzle.config.js ensure-db.js ./
 # Generate the SQL migration from the schema with the real tool at image build. A real project commits ./drizzle instead.
 RUN npx drizzle-kit generate --name init
+RUN chown -R node:node .
+USER node
 CMD ["sh", "-c", "node ensure-db.js && npx drizzle-kit migrate"]

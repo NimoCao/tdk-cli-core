@@ -11,4 +11,7 @@ RUN npm install
 # Two processes: the API server (its own port) in the background, the web app on the port TDK assigns.
 # Vite must listen beyond loopback (--host).
 WORKDIR /work/app/apps/web
+RUN chown -R node:node .
+USER node
+HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=3 CMD nc -z 127.0.0.1 ${PORT:-3001} || exit 1
 CMD ["sh", "-c", "(cd ../server && npm run dev) & exec npx vite --host 0.0.0.0 --port ${PORT:-3001}"]
