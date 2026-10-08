@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Qwik-specific Vite templates for frontend resources.
 
 QWIK_VITE_FRONTEND = """{header}

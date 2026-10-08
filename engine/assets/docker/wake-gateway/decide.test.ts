@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { describe, expect, test } from "bun:test";
 import {
   COMPOSE_START_TIMEOUT_MS,

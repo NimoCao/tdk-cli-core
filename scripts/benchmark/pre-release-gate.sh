@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Opt-in container scale gate for git hooks. No-op unless TDK_BENCH_GATE=1.
 #   TDK_BENCH_GATE=1 git push            # run full gate (tiers up to 100)
 #   TDK_BENCH_GATE=1 TDK_BENCH_TIERS=5,10,20 git commit ...

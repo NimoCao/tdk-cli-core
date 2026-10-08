@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 // Pure transform for AI "Write spec" buttons on issue bodies. This is the
 // only implementation; .github/workflows/ai-spec-buttons.yml checks the
 // default branch out (persist-credentials: false) and runs this file.

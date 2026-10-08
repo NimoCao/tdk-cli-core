@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 // Publish-time bundle of the tsc output (dist/ -> dist-bundle/).
 //
 // ink, react and chalk (plus their transitive deps, notably es-toolkit at

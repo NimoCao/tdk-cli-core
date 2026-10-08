@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Preact-specific Vite templates for frontend resources.
 
 PREACT_VITE_FRONTEND = """{header}

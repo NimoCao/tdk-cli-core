@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 load(
     "./manifest/normalize.star",
     _load_and_normalize = "load_and_normalize",

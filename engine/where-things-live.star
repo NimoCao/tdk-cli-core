@@ -1,4 +1,6 @@
 #!/usr/bin/env starlark
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Tilt Master Spec File
 # SYSTEM PATHS SPECIFICATION - No Hidden Magic
 # Format: Explicit constants for all system paths

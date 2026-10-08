@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """Standalone TDK projects must serve api.{project}.localhost via Traefik."""
 
 import json

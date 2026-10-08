@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 set -euo pipefail
 
 project_dir="${1:?usage: cold-start.sh PROJECT_DIR}"

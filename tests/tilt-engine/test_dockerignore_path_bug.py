@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """
 Regression test for the sibling-service dockerignore collision bug.
 

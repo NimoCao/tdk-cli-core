@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """Regression checks for generated environment files on BYO resources."""
 
 from pathlib import Path

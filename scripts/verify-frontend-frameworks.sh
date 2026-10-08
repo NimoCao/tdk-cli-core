@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Scaffold one frontend per framework provider in ONE isolated throwaway project, run them through a single real `tdk up` and Traefik,
 # and check each one: its route answers 200, the HTML carries the app's module script, and that script is served under the base path
 # with a JavaScript content type. This is stronger than a `vite build`: it proves the generated Dockerfile, nginx and Traefik route.

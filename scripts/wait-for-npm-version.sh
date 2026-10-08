@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Wait for an exact package version to become visible through the public npm
 # registry. A successful `npm publish` can precede registry propagation by
 # several minutes, while release-triggered E2E workflows start immediately.

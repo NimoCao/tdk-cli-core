@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 load('./vite/generators.star',
     'generate_frontend',
     'generate_backend',

@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 load("../../../../discovery/registry.star", _DEFAULTS_EXPORT = "DEFAULTS_EXPORT")
 
 def is_enabled(flag_name, cfg, fallback = True):

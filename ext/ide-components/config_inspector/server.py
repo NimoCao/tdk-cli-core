@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """
 Tilt IDE Config Inspector
 Compare master configs and auto-generated outputs at http://localhost:9767

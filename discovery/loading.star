@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 load("./manifest/constants.star", "MANIFEST_FILENAME", "MANIFEST_DEFAULTS", "VALID_APP_TYPES", "DEFAULT_SYNCS")
 load("./manifest/loading.star", "load_manifest", "load_related_manifest", "get_default_syncs_for_type")
 load("./validation.star", _validate = "validate")

@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # === INLINED CONSTANTS for pure extension loading ===
 BASE_PORT_FRONTEND = 3000
 BASE_PORT_BACKEND = 4000

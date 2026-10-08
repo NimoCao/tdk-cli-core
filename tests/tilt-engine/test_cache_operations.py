@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """
 Tests for registry cache operations.
 Tests the CRUD operations for the service registry cache.

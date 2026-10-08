@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import fc from "fast-check";
 import { describe, expect, it } from "vitest";
 import { validateGeneratedStringFields } from "../../cli/src/utils/service-manifest.js";

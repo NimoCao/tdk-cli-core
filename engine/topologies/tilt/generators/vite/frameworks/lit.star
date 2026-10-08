@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Lit-specific Vite templates for frontend resources.
 
 LIT_VITE_FRONTEND = """{header}

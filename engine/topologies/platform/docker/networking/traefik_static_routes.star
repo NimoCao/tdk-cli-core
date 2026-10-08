@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # =============================================================================
 # Traefik static (file-provider) route for a deferred (`sablier.deferStart`)
 # resource -- see openspec/changes/prioritized-cold-start.

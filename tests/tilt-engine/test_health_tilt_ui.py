@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """
 Tests for health status in Tilt UI.
 Tests the mapping from health responses to Tilt UI indicators.

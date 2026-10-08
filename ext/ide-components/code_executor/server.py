@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """
 Tilt IDE Code Executor
 Execute commands from web UI at http://localhost:9768

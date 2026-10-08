@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 // Fetches last-month npm download counts and writes docs/assets/npm-downloads.svg.
 // Note: npm counts include CI installs and mirrors; they are downloads, not users.
 import { writeFile } from "node:fs/promises";

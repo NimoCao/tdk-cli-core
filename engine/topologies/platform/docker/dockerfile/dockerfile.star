@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Dockerfile generation exports
 # === INLINED CONSTANTS for pure extension loading ===
 BASE_PORT_FRONTEND = 3000

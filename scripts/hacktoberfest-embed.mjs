@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 // Puts the Hacktoberfest map at the top of every open issue labelled `hacktoberfest` that does not show it yet.
 // Safe to re-run: issues that already embed the map are skipped. Needs the `gh` CLI with issues: write.
 // Run: node scripts/hacktoberfest-embed.mjs [owner/repo]

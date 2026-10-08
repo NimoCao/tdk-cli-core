@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # ============================================================================
 # Cron Jobs Status HTTP Server
 # Serves cron job status as JSON for the UI extension

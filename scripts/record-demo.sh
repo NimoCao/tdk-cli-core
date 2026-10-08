@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Re-record docs/assets/demo.svg, the animated terminal demo shown in README.md.
 #
 # Needs `tdk` on PATH and termtosvg (pip install termtosvg). Run from the

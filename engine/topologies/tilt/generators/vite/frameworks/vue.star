@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Vue-specific Vite templates for frontend resources.
 
 VUE_VITE_FRONTEND = """{header}

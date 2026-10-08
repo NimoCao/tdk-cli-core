@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """
 Tests for snapshot diff detection functionality.
 Tests the comparison between old and new snapshots.

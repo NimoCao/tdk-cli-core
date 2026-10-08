@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """
 Tests for resource snapshot scanning functionality.
 Tests the filesystem scanning and service.json discovery.

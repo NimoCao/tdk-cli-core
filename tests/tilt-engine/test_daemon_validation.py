@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """
 Tests for daemon service validation.
 Tests that invalid service.json files are rejected before registration.

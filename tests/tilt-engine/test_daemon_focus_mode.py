@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """
 Tests for daemon focus mode compliance.
 Tests that discovery respects focus mode stack restrictions.

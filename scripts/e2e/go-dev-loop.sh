@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Run a native Go service with `dev.liveReload` through a real `tdk up` and check the development loop through Traefik (#369):
 # an ordinary edit is served without an image rebuild, a broken edit puts the compiler error in Tilt's log while the last good build
 # keeps serving, and the next valid edit recovers. Prints the first-start and warm edit-to-ready timings it observed.

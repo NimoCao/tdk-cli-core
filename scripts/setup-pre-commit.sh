@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Setup script for TDK CLI development environment
 
 set -e

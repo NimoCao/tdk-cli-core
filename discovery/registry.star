@@ -1,5 +1,7 @@
 #!/usr/bin/env starlark
 # -*- coding: utf-8 -*-
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # =============================================================================
 # 🔍 DISCOVERY REGISTRY - Service Discovery for TDK CLI
 # =============================================================================

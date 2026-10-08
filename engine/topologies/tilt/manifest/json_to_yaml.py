@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """Convert JSON manifest to Tilt-compatible YAML resource"""
 import sys
 import json

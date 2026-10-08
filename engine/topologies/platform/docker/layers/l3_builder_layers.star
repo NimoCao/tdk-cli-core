@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # === INLINED CONSTANTS for pure extension loading ===
 WEB_FRAMEWORK = "hono"
 RUNTIME_CONFIG = {"bun": {"image_base": "oven/bun:1.3.11-alpine", "package_manager": "bun", "lockfile": "bun.lock", "backend_start_command": "bun run start", "frontend_start_command": "bun run dev"}, "node": {"image_base": "node:20-alpine", "package_manager": "npm", "lockfile": "package-lock.json", "backend_start_command": "node dist/index.js"}}

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Run two examples/byo services in ONE throwaway project through a real `tdk up`: a dependency (for example a database server)
 # and an app that connects to it over the landscape's Docker network. The check is the app's health route, so write that route
 # to need the dependency (a real round trip), and a 200 means the two actually talk.

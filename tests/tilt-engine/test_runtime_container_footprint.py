@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """
 Runtime container footprint: single Bun process, cheap healthchecks, lean golden images.
 

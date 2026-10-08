@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 // Draws two SVG maps from the issue labels: one island per "island: ..." label, one dot per quest (issue).
 //   docs/journey/map.svg           every quest, the contributor journey
 //   docs/journey/hacktoberfest.svg only quests labelled `hacktoberfest`, with a countdown

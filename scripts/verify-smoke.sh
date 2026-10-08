@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Check the `smoke` manifest block through a real `tdk up`, in an isolated throwaway project.
 #   Phase 1: a backend with an in-memory /records API declares a smoke block (POST a record, GET it back by the saved id).
 #            `tdk up` must print "Smoke check passed" and keep running.

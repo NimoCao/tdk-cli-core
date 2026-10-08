@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """Drive the Go development loop of a running `tdk up` project and check what it does (#369).
 
 Called by scripts/e2e/go-dev-loop.sh. It edits main.go, polls the service through Traefik every 25 ms, reads Tilt's own log, and exits 1

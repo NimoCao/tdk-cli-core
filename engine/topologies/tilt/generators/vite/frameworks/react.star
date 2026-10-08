@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # React-specific Vite templates for frontend resources.
 
 REACT_VITE_FRONTEND = """{header}

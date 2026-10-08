@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Records one pilot measurement of a TDK project in a form teams can compare:
 # machine and versions, time until every service health URL that `tdk up` prints
 # answers HTTP 200, and the memory/CPU of the containers `tdk up` started. Fields only a person can fill in (setup steps,

@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 def by_app_name(manifests):
     indexed = {}
     for manifest in manifests:

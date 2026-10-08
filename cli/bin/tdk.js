@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 
 import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";

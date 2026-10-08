@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # ====================================================================
 # Container Debug Helper Script
 # Provides easy access to debugging running or failed Docker containers

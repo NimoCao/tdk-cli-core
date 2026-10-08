@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # ============================================================================
 # Cron Jobs Status Tracker
 # Tracks execution status of all cron jobs

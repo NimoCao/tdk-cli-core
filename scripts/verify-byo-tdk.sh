@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Run one examples/byo/<name> service through a real `tdk up` and check it answers through Traefik.
 # Needs Docker, Tilt, and a built CLI (cli/dist). Uses an isolated throwaway project with unique
 # names and random alternate ports, and removes only the containers and networks carrying its own

@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # =============================================================================
 # Docker healthcheck timing - single source for golden images, L4 runtimes and
 # generated compose files.

@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # =============================================================================
 # 🔄 TILT LIFECYCLE - SERVICE STARTUP ORCHESTRATOR
 # =============================================================================

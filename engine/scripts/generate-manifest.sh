@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # =============================================================================
 # 🎯 TDK Landscape - RESOURCE MANIFEST GENERATOR
 # =============================================================================

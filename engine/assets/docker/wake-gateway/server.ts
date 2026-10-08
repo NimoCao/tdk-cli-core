@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 /**
  * Wake gateway: fronts every `sablier.deferStart` resource's Traefik static
  * route (see openspec/changes/prioritized-cold-start). On the first request

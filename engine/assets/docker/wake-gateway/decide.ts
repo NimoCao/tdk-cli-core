@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 /**
  * Pure decision logic for the wake gateway (see openspec/changes/prioritized-cold-start).
  *

@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Dockerfiles for backends whose `language` is not the Bun default.
 #
 # Bun backends use the golden-image generator. Python backends are a small

@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """
 Tests for registry cache persistence.
 Tests saving and loading the cache from the filesystem.

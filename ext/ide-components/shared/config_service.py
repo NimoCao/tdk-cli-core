@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """
 ConfigService - File operations for Config Inspector
 Handles safe file reading/writing with validation, backups, and conflict detection.

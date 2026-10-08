@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """
 Tests for discovery daemon polling behavior.
 Tests the continuous monitoring and polling intervals.

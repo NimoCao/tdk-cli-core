@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 
 # TDK Landscape Mac M1 Resource Monitor
 # Monitors Docker container resource usage and provides optimization recommendations

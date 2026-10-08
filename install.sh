@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Legacy installer URL for the TDK CLI.
 #
 # The official installer is https://tdk-landscape.github.io/install.sh. It

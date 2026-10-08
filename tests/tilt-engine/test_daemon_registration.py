@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """
 Tests for daemon auto-registration functionality.
 Tests the triggering of Tilt resource creation for new services.

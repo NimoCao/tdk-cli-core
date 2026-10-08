@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Run one examples/byo-jobs/<name> one-shot job through a real `tdk up` and check the result.
 # Needs Docker, Tilt, and a built CLI (cli/dist). Uses an isolated throwaway project with unique
 # names and alternate ports, and removes only the containers and networks carrying its own

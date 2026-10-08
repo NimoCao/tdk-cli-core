@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """
 sablier.deferStart: schema field and its enable-required cross-field rule.
 

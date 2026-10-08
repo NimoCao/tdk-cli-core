@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Scaffold an `mcp` resource in an isolated throwaway project, run it through a real `tdk up` and Traefik, and talk to it with the
 # official MCP TypeScript SDK client (not just curl): connect, list the tools, call the `echo` tool. The client uses the real host
 # name `api.<project>.localhost`, so this also shows that a client resolves it.

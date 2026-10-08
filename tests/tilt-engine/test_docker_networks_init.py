@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 """init-networks must fail with Docker's own message when a network cannot be created.
 
 The command string comes from ``fix_docker_networks`` (evaluated by Tilt) and is run with

@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Deterministic Tilt Configuration for TDK Landscape
 # Inspired by Mira Murati's "Defeating Nondeterminism" philosophy
 # Goal: Same filesystem state + same environment = identical Tilt output

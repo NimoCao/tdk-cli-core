@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # =============================================================================
 # On-demand scaling: Sablier + Traefik (free-tier stub)
 # =============================================================================

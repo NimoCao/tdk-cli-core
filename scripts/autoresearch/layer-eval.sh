@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 # Ground-truth evaluation for L1-L4 layer experiments. DO NOT EDIT during an autoresearch run.
 # Re-vendors this engine into the ERP project, regenerates Dockerfiles through Tilt, rebuilds the
 # golden layers and a fixed sample of 20 real ERP services, runs the container benchmark and the

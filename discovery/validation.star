@@ -1,3 +1,5 @@
+# Copyright (c) 2026 TDK Landscape contributors
+# SPDX-License-Identifier: MIT
 load("./TILT_DISCOVERY.star",
     "VALID_STACKS",
     "VALID_RESOURCE_FEATURES",
