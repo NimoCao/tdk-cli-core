@@ -12,4 +12,7 @@ RUN mix compile
 # all IPv4 interfaces. Fail the build if the line is not there. config/runtime.exs already reads PORT.
 RUN sed -i 's/http: \[ip: {127, 0, 0, 1}\]/http: [ip: {0, 0, 0, 0}]/' config/dev.exs \
  && grep -q 'http: \[ip: {0, 0, 0, 0}\]' config/dev.exs
+RUN groupadd --gid 1000 app && useradd --uid 1000 --gid app --no-create-home app
+RUN chown -R app:app /work
+USER app
 CMD ["mix", "phx.server"]

@@ -5,5 +5,7 @@ WORKDIR /app
 COPY Gemfile ./
 RUN bundle install --quiet
 COPY app.rb ./
+RUN groupadd --gid 1000 app && useradd --uid 1000 --gid app --no-create-home app
+USER app
 # Classic-style apps start their own server when run directly (Puma here); app.rb binds 0.0.0.0 and reads PORT.
 CMD ["ruby", "app.rb"]

@@ -3,4 +3,6 @@ FROM alpine:3.20@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6
 RUN apk add --no-cache postgresql-client
 COPY --from=arigaio/atlas:latest /atlas /usr/local/bin/atlas
 COPY schema.hcl migrate.sh /
+RUN addgroup -g 1000 app && adduser -u 1000 -G app -D -H app
+USER app
 CMD ["sh", "/migrate.sh"]

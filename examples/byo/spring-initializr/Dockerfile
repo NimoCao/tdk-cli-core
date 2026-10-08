@@ -11,5 +11,7 @@ RUN mvn -q -B -DskipTests package && ls target/*.jar
 FROM eclipse-temurin:21-jre@sha256:cff19e6215689161eb6162c11b86b0c60ddf802164f2eaf48d570f8fb79a36c5
 WORKDIR /app
 COPY --from=build /work/target/app-*.jar /app/app.jar
+RUN groupadd --gid 1000 app && useradd --uid 1000 --gid app --no-create-home app
+USER app
 # Spring binds all interfaces by default; the port comes from SERVER_PORT, which we set from TDK's PORT.
 CMD ["sh", "-c", "SERVER_PORT=${PORT:-8080} exec java -jar /app/app.jar"]

@@ -12,5 +12,7 @@ ENV DATABASE_FILENAME=.tmp/data.db
 RUN mkdir -p .tmp
 # Build the admin panel once, at image build time.
 RUN npm run build
+RUN chown -R node:node .
+USER node
 # HOST and PORT are read by config/server.ts. Strapi's default HOST is 0.0.0.0; PORT comes from TDK.
 CMD ["sh", "-c", "HOST=0.0.0.0 PORT=${PORT:-1337} npm run start"]

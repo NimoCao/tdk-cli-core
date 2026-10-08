@@ -12,6 +12,9 @@ RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends libssl3
 WORKDIR /app
 COPY --from=build /work/app/target/release/app-cli /app/app-cli
 COPY --from=build /work/app/config /app/config
+RUN groupadd --gid 1000 app && useradd --uid 1000 --gid app --no-create-home app
+RUN chown -R app:app /app
+USER app
 # loco reads PORT and BINDING from the environment (see config/development.yaml); bind beyond loopback.
 ENV BINDING=0.0.0.0
 CMD ["./app-cli", "start"]

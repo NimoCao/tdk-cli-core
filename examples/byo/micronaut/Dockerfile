@@ -13,5 +13,7 @@ RUN ./mvnw -q -B -DskipTests package && ls target/*.jar
 FROM eclipse-temurin:25-jre@sha256:fcd7fd7b387f94bb2ac461478a7436ad8e349924c374ea8313919624dceae636
 WORKDIR /app
 COPY --from=build /work/app/target/app-*.jar /app/app.jar
+RUN groupadd --gid 1000 app && useradd --uid 1000 --gid app --no-create-home app
+USER app
 # Micronaut's Netty server listens on all interfaces; the port comes from MICRONAUT_SERVER_PORT, set from TDK's PORT.
 CMD ["sh", "-c", "MICRONAUT_SERVER_PORT=${PORT:-8080} exec java -jar /app/app.jar"]

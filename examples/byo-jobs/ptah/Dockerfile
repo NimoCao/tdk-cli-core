@@ -4,5 +4,7 @@ FROM stokaro/ptah:0.12.0@sha256:fdf9c7009018a6cd3954c43f986d8b283c35255ed468c98e
 RUN apk add --no-cache postgresql-client
 COPY migrations /migrations
 COPY migrate.sh /migrate.sh
+RUN addgroup -g 1000 app && adduser -u 1000 -G app -D -H app
+USER app
 # The image's entrypoint is ptah itself, so replace it with the script.
 ENTRYPOINT ["/bin/sh", "/migrate.sh"]

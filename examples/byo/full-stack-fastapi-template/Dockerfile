@@ -12,4 +12,7 @@ ENV PATH="/src/.venv/bin:$PATH"
 RUN mkdir -p backend/app/frontend && echo '<!doctype html><title>api only</title>' > backend/app/frontend/index.html
 COPY ensure_db.py entrypoint.sh /
 WORKDIR /src/backend
+RUN groupadd --gid 1000 app && useradd --uid 1000 --gid app --no-create-home app
+RUN chown -R app:app /src
+USER app
 CMD ["sh", "/entrypoint.sh"]
