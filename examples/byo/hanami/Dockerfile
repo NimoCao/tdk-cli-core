@@ -1,6 +1,6 @@
 # A real `hanami new` app (Ruby 3.4, no database): the generator runs at build time.
 FROM ruby:3.4-slim@sha256:976f45719573889b0ef02fcff5fd7a486cb09a56ad11c472d51d49604c31d6ab
-RUN apt-get update -qq && apt-get install -y -qq build-essential git libyaml-dev curl >/dev/null \
+RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends build-essential git libyaml-dev curl >/dev/null \
  && rm -rf /var/lib/apt/lists/*
 WORKDIR /work
 RUN gem install hanami --no-document >/dev/null \

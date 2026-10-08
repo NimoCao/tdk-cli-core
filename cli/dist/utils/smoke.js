@@ -110,6 +110,9 @@ function readPath(value, path) {
     for (const part of parts) {
         if (current === null || current === undefined)
             return undefined;
+        // Own properties only: a path like "__proto__" must not reach inherited values.
+        if (!Object.hasOwn(current, part))
+            return undefined;
         current = current[part];
     }
     return current;

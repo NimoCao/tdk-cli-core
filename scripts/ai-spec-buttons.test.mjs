@@ -13,6 +13,23 @@ import {
   transformBody,
 } from "./ai-spec-buttons.mjs";
 
+// Every http(s) link in text. Substring checks on a URL also match an unrelated URL that
+// contains it (for example "https://evil.example/?next=https://grok.com/"), so the tests
+// compare whole links and hosts instead.
+function links(text) {
+  return [...text.matchAll(/https?:\/\/[^\s)"'<>\]]+/g)].map((m) => m[0]);
+}
+
+function linkHosts(text) {
+  return links(text).map((link) => {
+    try {
+      return new URL(link).hostname;
+    } catch {
+      return "";
+    }
+  });
+}
+
 const url = "https://github.com/tdk-landscape/tdk-cli-core/issues/123";
 
 const featureBody = [
@@ -176,7 +193,7 @@ describe("buildButtonsHtml", () => {
     assert.ok(html.includes(`https://claude.ai/new?q=${q}`));
     assert.ok(html.includes(`https://chatgpt.com/?q=${q}`));
     assert.ok(!html.includes("%0A"));
-    assert.ok(!html.includes("img.shields.io"));
+    assert.ok(!linkHosts(html).some((host) => host === "img.shields.io"));
     // One row: badges separated by &nbsp;, never by newlines.
     assert.ok(html.includes(")&nbsp;[![Claude]"));
     assert.ok(html.includes(")&nbsp;[![Codex]"));

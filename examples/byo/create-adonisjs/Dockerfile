@@ -6,4 +6,7 @@ RUN npm create adonisjs@latest app -- --kit=github:adonisjs/slim-starter-kit --p
 WORKDIR /work/app
 # The app reads PORT and HOST from the environment; HOST must be beyond loopback.
 ENV HOST=0.0.0.0
+RUN chown -R node:node .
+USER node
+HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=3 CMD nc -z 127.0.0.1 ${PORT:-3333} || exit 1
 CMD ["npm", "run", "dev"]

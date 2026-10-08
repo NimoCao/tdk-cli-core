@@ -56,9 +56,12 @@ export function parsePublishedPortHolders(dockerPsOutput, ports) {
         const portsField = tab >= 0 ? trimmed.slice(tab + 1) : "";
         const publishedPorts = [];
         for (const port of wanted) {
-            // Matches 0.0.0.0:80->, :::80->, 127.0.0.1:80->
-            const pattern = new RegExp(`(?:^|[\\s,])(?:\\d[\\d.]*:|\\[::\\]:|::)?${port}->`);
-            if (pattern.test(portsField) || portsField.includes(`:${port}->`)) {
+            // Each mapping is "[ip:]hostPort->containerPort/proto"; match the host port exactly
+            // (80-> or 0.0.0.0:80->, :::80->, 127.0.0.1:80->), never a longer number such as 1080->.
+            const published = portsField
+                .split(/[\s,]+/)
+                .some((mapping) => mapping.startsWith(`${port}->`) || mapping.includes(`:${port}->`));
+            if (published) {
                 publishedPorts.push(port);
             }
         }

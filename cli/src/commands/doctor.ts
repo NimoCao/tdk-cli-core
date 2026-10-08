@@ -1024,8 +1024,8 @@ function parseDockerStats(raw: string): ContainerStat[] {
       const [name, memPctRaw, cpuPctRaw] = line.split(",");
       return {
         name: name ?? "unknown",
-        memPct: Number.parseFloat((memPctRaw ?? "").replace("%", "")),
-        cpuPct: Number.parseFloat((cpuPctRaw ?? "").replace("%", "")),
+        memPct: Number.parseFloat((memPctRaw ?? "").replace(/%/g, "")),
+        cpuPct: Number.parseFloat((cpuPctRaw ?? "").replace(/%/g, "")),
       };
     })
     .filter((stat) => Number.isFinite(stat.memPct) && Number.isFinite(stat.cpuPct));

@@ -4,5 +4,8 @@ WORKDIR /work
 RUN npx --yes express-generator@4 app --no-view
 WORKDIR /work/app
 RUN npm install
+RUN chown -R node:node .
+USER node
+HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=3 CMD nc -z 127.0.0.1 ${PORT:-3000} || exit 1
 # The generated bin/www reads PORT and listens on all interfaces.
 CMD ["node", "./bin/www"]

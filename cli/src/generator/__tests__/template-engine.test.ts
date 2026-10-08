@@ -4,12 +4,14 @@ import * as fs from "node:fs";
 import * as os from "node:os";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
+import Handlebars from "handlebars";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import type { ProjectConfig } from "../../types/index.js";
 import {
   generateDatabaseManagementCompose,
   generateMasterConfigs,
   loadTemplate,
+  TemplateEngine,
   verifyMasterConfigs,
 } from "../template-engine.js";
 
@@ -307,6 +309,21 @@ describe("template-engine", () => {
         fs.rmSync(projectRoot, { recursive: true, force: true });
       }
     }, 15000);
+  });
+
+  describe("starlark helper", () => {
+    const render = (value: unknown) => {
+      new TemplateEngine();
+      return Handlebars.compile("{{starlark v}}")({ v: value });
+    };
+
+    it("escapes a trailing backslash so it cannot close the string", () => {
+      expect(render("C:\\dir\\")).toBe('"C:\\\\dir\\\\"');
+    });
+
+    it("escapes quotes and backslashes in object keys too", () => {
+      expect(render({ 'a"b\\': "x" })).toBe('{"a\\"b\\\\": "x"}');
+    });
   });
 
   describe("loadTemplate", () => {

@@ -3,4 +3,6 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install --omit=dev
 COPY server.js ./
+USER node
+HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=3 CMD nc -z 127.0.0.1 ${PORT:-3000} || exit 1
 CMD ["node", "server.js"]

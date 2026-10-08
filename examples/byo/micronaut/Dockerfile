@@ -3,7 +3,7 @@
 # (class file version 69), and a Java 21 JRE fails with UnsupportedClassVersionError.
 FROM eclipse-temurin:25-jdk@sha256:8c0a84ea11c8f6ed52600fc19f1040121f2a162998e9f50a5faebbbad9172dcc AS build
 WORKDIR /work
-RUN apt-get update -qq && apt-get install -y -qq curl unzip >/dev/null \
+RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends curl unzip >/dev/null \
  && curl -fsSL "https://launch.micronaut.io/create/default/dev.tdk.app?lang=JAVA&build=MAVEN&test=JUNIT&javaVersion=JDK_25&features=management" -o starter.zip \
  && unzip -q starter.zip && rm starter.zip
 WORKDIR /work/app

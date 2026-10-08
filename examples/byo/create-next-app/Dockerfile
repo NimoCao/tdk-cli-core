@@ -4,5 +4,8 @@ WORKDIR /work
 RUN npx --yes create-next-app@latest app --ts --app --no-tailwind --eslint --no-src-dir --import-alias "@/*" \
     --use-npm --yes --disable-git </dev/null
 WORKDIR /work/app
+RUN chown -R node:node .
+USER node
+HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=3 CMD nc -z 127.0.0.1 ${PORT:-3000} || exit 1
 # next dev must listen beyond loopback (-H) and on the port TDK assigns.
 CMD ["sh", "-c", "npx next dev -H 0.0.0.0 -p ${PORT:-3000}"]

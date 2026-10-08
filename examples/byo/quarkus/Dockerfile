@@ -2,7 +2,7 @@
 # downloaded at build time.
 FROM maven:3-eclipse-temurin-21@sha256:9b4877723dadf350b452dd97d9a6401e7b56f98fa9dfe420c32ad909989c7e4c AS build
 WORKDIR /work
-RUN apt-get update -qq && apt-get install -y -qq curl unzip >/dev/null \
+RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends curl unzip >/dev/null \
  && curl -fsSL "https://code.quarkus.io/d?g=dev.tdk&a=app&b=MAVEN&e=rest&e=smallrye-health&nc=true" -o starter.zip \
  && unzip -q starter.zip && rm starter.zip && ls
 WORKDIR /work/app

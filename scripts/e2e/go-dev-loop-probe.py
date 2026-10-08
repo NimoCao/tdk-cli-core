@@ -43,6 +43,9 @@ ap.add_argument("edits", type=int)
 ap.add_argument("--max-ready", type=float, default=20.0)
 args = ap.parse_args()
 
+# The URL is always http://127.0.0.1:<port><path>; reject anything that could change its host or scheme.
+if not args.traefik_port.isdigit() or not args.route.startswith("/"):
+    ap.error("traefik_port must be digits and route must start with /")
 url = f"http://127.0.0.1:{args.traefik_port}{args.route}"
 failures: list[str] = []
 samples: list[tuple[float, str]] = []  # (time, "200 <version>" | "HTTP 502" | "ERR ...")

@@ -28,7 +28,7 @@ const publishWorkflow = readFileSync(
 
 const frameworkIds = [...Object.keys(FRONTEND_FRAMEWORKS), ...Object.keys(BACKEND_FRAMEWORKS)];
 const languageIds = Object.keys(BACKEND_LANGUAGES);
-const ajv = new Ajv({ allErrors: true, strict: false });
+const ajv = new Ajv({ strict: false });
 const validateService = ajv.compile(schema);
 const manifest = (fields: Record<string, unknown>) => ({
   stack: "shop",

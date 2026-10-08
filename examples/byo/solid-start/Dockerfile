@@ -4,5 +4,8 @@ WORKDIR /work
 RUN npx --yes create-solid@latest -p app -s --v2 -t basic --ts </dev/null
 WORKDIR /work/app
 RUN npm install
+RUN chown -R node:node .
+USER node
+HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=3 CMD nc -z 127.0.0.1 ${PORT:-3000} || exit 1
 # SolidStart v2's dev server is Vite: listen beyond loopback (--host) and on the port TDK assigns.
 CMD ["sh", "-c", "npx vite dev --host 0.0.0.0 --port ${PORT:-3000}"]

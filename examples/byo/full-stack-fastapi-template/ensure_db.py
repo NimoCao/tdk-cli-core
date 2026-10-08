@@ -4,6 +4,7 @@ import time
 from urllib.parse import urlsplit, urlunsplit
 
 import psycopg
+from psycopg import sql
 
 url = os.environ["DATABASE_URL"].split("?")[0]
 parts = urlsplit(url)
@@ -22,4 +23,5 @@ for attempt in range(60):
 with conn:
     exists = conn.execute("select 1 from pg_database where datname = %s", (db,)).fetchone()
     if not exists:
-        conn.execute('create database "' + db.replace('"', '""') + '"')
+        # nosemgrep: python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query -- psycopg sql.Identifier quotes the database name
+        conn.execute(sql.SQL("create database {}").format(sql.Identifier(db)))

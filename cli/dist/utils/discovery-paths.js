@@ -11,12 +11,36 @@ const DEFAULT_DISCOVERY_PATHS = ["services/*/*"];
 function segments(path) {
     return path.split(sep).filter(Boolean);
 }
+// Wildcard match without building a RegExp: `*` matches any run of characters, `?` one character,
+// everything else is literal. Greedy with a single backtrack point, so it stays linear-ish on
+// hostile patterns such as "a*a*a*b".
 function segmentMatches(pattern, name) {
-    const source = pattern
-        .replace(/[.+^${}()|[\]\\]/g, "\\$&")
-        .replace(/\*/g, "[^/]*")
-        .replace(/\?/g, "[^/]");
-    return new RegExp(`^${source}$`).test(name);
+    let p = 0;
+    let n = 0;
+    let starP = -1;
+    let starN = 0;
+    while (n < name.length) {
+        if (p < pattern.length &&
+            pattern[p] !== "*" &&
+            (pattern[p] === "?" || pattern[p] === name[n])) {
+            p++;
+            n++;
+        }
+        else if (p < pattern.length && pattern[p] === "*") {
+            starP = p++;
+            starN = n;
+        }
+        else if (starP !== -1) {
+            p = starP + 1;
+            n = ++starN;
+        }
+        else {
+            return false;
+        }
+    }
+    while (p < pattern.length && pattern[p] === "*")
+        p++;
+    return p === pattern.length;
 }
 function globMatchesDir(patternSegments, dirSegments) {
     return (patternSegments.length === dirSegments.length &&

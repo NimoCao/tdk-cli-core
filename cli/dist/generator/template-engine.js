@@ -93,12 +93,16 @@ export class TemplateEngine {
         this.templatesDir = templatesDir || path.join(currentDir, "..", "..", "templates");
         this.registerHelpers();
     }
+    // Backslashes must be escaped before quotes, or a value ending in a backslash escapes the closing quote.
+    quoteStarlarkString(s) {
+        return `"${s.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
+    }
     formatStarlarkValue(val) {
         if (val === null || val === undefined) {
             return "None";
         }
         if (typeof val === "string") {
-            return `"${val.replace(/"/g, '\\"')}"`;
+            return this.quoteStarlarkString(val);
         }
         if (typeof val === "boolean") {
             return val ? "True" : "False";
@@ -112,7 +116,7 @@ export class TemplateEngine {
         }
         if (typeof val === "object") {
             const entries = Object.entries(val).map(([key, v]) => {
-                return `"${key}": ${this.formatStarlarkValue(v)}`;
+                return `${this.quoteStarlarkString(key)}: ${this.formatStarlarkValue(v)}`;
             });
             return `{${entries.join(", ")}}`;
         }

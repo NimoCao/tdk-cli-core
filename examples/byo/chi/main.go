@@ -29,5 +29,6 @@ func main() {
 		port = "8080"
 	}
 	// ":" + port listens on every interface, which Traefik needs inside the container network.
+	// nosemgrep: go.lang.security.audit.net.use-tls.use-tls -- TLS is terminated by Traefik; this hop stays inside the container network
 	log.Fatal(http.ListenAndServe(":"+port, r))
 }

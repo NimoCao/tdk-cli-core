@@ -56,7 +56,11 @@ jobs:
       # The Linux compiled-binary project-generation smoke test runs tdk doctor,
       # which requires Tilt and the TDK host ports to be available.
       - name: Install Tilt for the Linux release binary smoke test
-        run: curl -fsSL https://raw.githubusercontent.com/tilt-dev/tilt/master/scripts/install.sh | bash
+        run: |
+          curl -fsSL -o tilt.tgz https://github.com/tilt-dev/tilt/releases/download/v0.37.8/tilt.0.37.8.linux.x86_64.tar.gz
+          echo "e39513f958705d30524d55f68b1d46fbef2b46a0da568efd00e6383dee6be44f  tilt.tgz" | sha256sum -c -
+          if [ "$(id -u)" -eq 0 ]; then tar -xzf tilt.tgz -C /usr/local/bin tilt; else sudo tar -xzf tilt.tgz -C /usr/local/bin tilt; fi
+          rm -f tilt.tgz
 
       - name: Free required host ports for the Linux release binary smoke test
         run: |
@@ -196,6 +200,7 @@ jobs:
     needs: [build, windows-smoke]
     runs-on: ubuntu-latest
     permissions:
+      attestations: write
       contents: write
       id-token: write
       issues: write
@@ -258,7 +263,7 @@ jobs:
       # never fail the release, so it is allowed to error.
       - name: Credit fixed issues with this release
         continue-on-error: true
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           VERSION: ${{ needs.build.outputs.version }}
           SOURCE_COMMIT: ${{ steps.source.outputs.commit }}
@@ -374,3 +379,23 @@ jobs:
               --notes "Signed checksums for tdk ${VERSION}. The binaries are on https://github.com/tdk-landscape/tdk-cli-releases/releases/tag/v${VERSION} and the npm package is @tdk-landscape/tdk-cli-core@${VERSION}. Verify with: cosign verify-blob --bundle checksums.txt.sigstore.json --certificate-identity-regexp 'https://github.com/tdk-landscape/tdk-cli-core/.github/workflows/release-binaries.yml@.*' --certificate-oidc-issuer https://token.actions.githubusercontent.com checksums.txt" \
               checksums.txt checksums.txt.sigstore.json
           fi
+
+      # SLSA build provenance for the checksums (a GitHub attestation tied to this workflow run), attached to the release as
+      # checksums.txt.intoto.jsonl. Untested until the next release runs: Scorecard's Signed-Releases check then needs
+      # provenance on the last five releases, so the score moves gradually. Like the signature, it can never block a release.
+      - name: Attest build provenance for the checksums
+        continue-on-error: true
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: checksums.txt
+
+      - name: Attach the provenance to the release in this repository
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.build.outputs.version }}
+        run: |
+          set -euo pipefail
+          gh attestation download checksums.txt --repo "$GITHUB_REPOSITORY"
+          mv sha256:*.jsonl checksums.txt.intoto.jsonl
+          gh release upload "v${VERSION}" --repo "$GITHUB_REPOSITORY" --clobber checksums.txt.intoto.jsonl

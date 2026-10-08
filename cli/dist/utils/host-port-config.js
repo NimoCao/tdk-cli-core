@@ -11,7 +11,7 @@ export function isDockerPortOwnedByProject(dockerPs, projectPrefix, port) {
         const containerName = name.toLowerCase();
         const prefix = projectPrefix.toLowerCase();
         return ((containerName.startsWith(`${prefix}_`) || containerName.startsWith(`${prefix}-`)) &&
-            new RegExp(`:${port}->`).test(ports));
+            ports.includes(`:${port}->`));
     });
 }
 export function readSavedHostPortPlan(projectRoot) {

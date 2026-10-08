@@ -11,6 +11,23 @@ import {
   closingIssue,
 } from "./ai-conflict-buttons.mjs";
 
+// Every http(s) link in text. Substring checks on a URL also match an unrelated URL that
+// contains it (for example "https://evil.example/?next=https://grok.com/"), so the tests
+// compare whole links and hosts instead.
+function links(text) {
+  return [...text.matchAll(/https?:\/\/[^\s)"'<>\]]+/g)].map((m) => m[0].replace(/[.,;:!?]+$/, ""));
+}
+
+function linkHosts(text) {
+  return links(text).map((link) => {
+    try {
+      return new URL(link).hostname;
+    } catch {
+      return "";
+    }
+  });
+}
+
 const url = "https://github.com/tdk-landscape/tdk-cli-core/pull/645";
 
 describe("closingIssue", () => {
@@ -31,7 +48,7 @@ describe("buildPrompt", () => {
       prNumber: 645,
       body: "Fixes #449.\n",
     });
-    assert.ok(prompt.includes(url));
+    assert.ok(links(prompt).some((link) => link === url));
     assert.ok(prompt.includes("Fetch xiehuanyi feat/ui-keyboard-navigation-round2"));
     assert.ok(prompt.includes("merge origin/main"));
     assert.ok(prompt.includes("Keep the changes from that branch. Keep main's changes."));
@@ -106,7 +123,7 @@ describe("buildComment", () => {
     const comment = buildComment({ ...input, conflicting: false });
     assert.ok(comment.startsWith(MARKER));
     assert.ok(comment.includes("no longer conflicts"));
-    assert.ok(!comment.includes("https://grok.com/"));
+    assert.ok(!linkHosts(comment).some((host) => host === "grok.com"));
     assert.ok(!comment.includes("# Resolve this conflict in"));
   });
 });
