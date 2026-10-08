@@ -30,6 +30,7 @@
   },
   "files": [
     "dist",
+    "dist-bundle",
     "bin",
     "templates",
     "README.md",
