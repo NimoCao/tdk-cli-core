@@ -28,7 +28,7 @@ cleanup() {
   pkill -f "tilt up.*$proj" >/dev/null 2>&1 || true
   docker rm -f $(docker ps -aq --filter "name=$proj") >/dev/null 2>&1 || true
   docker network ls --format '{{.Name}}' | grep "^${proj}" | xargs -r docker network rm >/dev/null 2>&1 || true
-  docker images --format '{{.Repository}}:{{.Tag}}' | grep -E "^app_${proj}:" | xargs -r docker rmi -f >/dev/null 2>&1 || true
+  docker images --format '{{.Repository}}:{{.Tag}}' | grep -E "^${proj}_" | xargs -r docker rmi -f >/dev/null 2>&1 || true
   docker images --format '{{.Repository}}:{{.Tag}}' | grep -E "^${proj}-l[0-9]+" | xargs -r docker rmi -f >/dev/null 2>&1 || true
 }
 trap cleanup EXIT

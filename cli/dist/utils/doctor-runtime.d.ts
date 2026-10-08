@@ -113,7 +113,7 @@ export declare function orderTiltFailures(failures: TiltResourceFailure[]): Tilt
  * Best-effort root cause for runtime crashes when buildHistory has no error.
  * Reads recent docker logs for the matching container name.
  */
-export declare function probeContainerRuntimeError(resourceName: string, exec?: typeof execSync): string | null;
+export declare function probeContainerRuntimeError(resourceName: string, exec?: typeof execSync, projectName?: string): string | null;
 export declare function describeTiltFailure(failure: TiltResourceFailure, exec?: typeof execSync): string;
 /**
  * The two paths a backend is probed on, resolved like the engine does:
