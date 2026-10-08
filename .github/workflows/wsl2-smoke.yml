@@ -67,9 +67,14 @@ jobs:
           docker info
           curl -fsSL https://nodejs.org/dist/v22.23.3/node-v22.23.3-linux-x64.tar.xz -o /tmp/node.tar.xz
           tar -xJf /tmp/node.tar.xz -C /usr/local --strip-components=1
-          curl -fsSL https://bun.sh/install | bash
-          ln -s /root/.bun/bin/bun /usr/local/bin/bun
-          curl -fsSL https://raw.githubusercontent.com/tilt-dev/tilt/master/scripts/install.sh | bash
+          curl -fsSL -o /tmp/bun.zip https://github.com/oven-sh/bun/releases/download/bun-v1.4.2/bun-linux-x64.zip
+          echo "36368faef7527875d5ffa52e53cd48021741f2a83eb6208a8dd64068d422a913  /tmp/bun.zip" | sha256sum -c -
+          python3 -m zipfile -e /tmp/bun.zip /tmp/bun-dl
+          install -m 0755 /tmp/bun-dl/bun-linux-x64/bun /usr/local/bin/bun
+          curl -fsSL -o tilt.tgz https://github.com/tilt-dev/tilt/releases/download/v0.37.8/tilt.0.37.8.linux.x86_64.tar.gz
+          echo "e39513f958705d30524d55f68b1d46fbef2b46a0da568efd00e6383dee6be44f  tilt.tgz" | sha256sum -c -
+          if [ "$(id -u)" -eq 0 ]; then tar -xzf tilt.tgz -C /usr/local/bin tilt; else sudo tar -xzf tilt.tgz -C /usr/local/bin tilt; fi
+          rm -f tilt.tgz
           { node --version; bun --version; tilt version; docker version; docker compose version; } | tee -a /root/tdk-evidence/environment.log
 
       - name: Build and install the candidate CLI

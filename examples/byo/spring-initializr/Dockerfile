@@ -1,7 +1,7 @@
 # A real Spring Initializr project (Maven, Java, Spring Web + Actuator, no database), downloaded at build time.
 FROM maven:3-eclipse-temurin-21@sha256:9b4877723dadf350b452dd97d9a6401e7b56f98fa9dfe420c32ad909989c7e4c AS build
 WORKDIR /work
-RUN apt-get update -qq && apt-get install -y -qq curl unzip >/dev/null \
+RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends curl unzip >/dev/null \
  && curl -fsSL https://start.spring.io/starter.zip \
       -d type=maven-project -d language=java -d name=app -d artifactId=app -d groupId=dev.tdk \
       -d dependencies=web,actuator -o starter.zip \

@@ -1,7 +1,7 @@
 # A real `rails new` app (minimal, SQLite file, no external database): the generator runs at build time.
 FROM ruby:3.4-slim@sha256:976f45719573889b0ef02fcff5fd7a486cb09a56ad11c472d51d49604c31d6ab
 ENV RAILS_ENV=development BUNDLE_PATH=/usr/local/bundle
-RUN apt-get update -qq && apt-get install -y -qq build-essential git libyaml-dev libsqlite3-dev pkg-config curl >/dev/null \
+RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends build-essential git libyaml-dev libsqlite3-dev pkg-config curl >/dev/null \
  && rm -rf /var/lib/apt/lists/*
 WORKDIR /work
 RUN gem install rails --no-document >/dev/null \
