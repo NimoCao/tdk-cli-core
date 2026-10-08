@@ -2,7 +2,14 @@
   "$schema": "https://biomejs.dev/schemas/2.5.14/schema.json",
   "files": {
     "ignoreUnknown": false,
-    "includes": ["**", "!**/node_modules", "!**/dist", "!**/*.lockb", "!**/*.svg"]
+    "includes": [
+      "**",
+      "!**/node_modules",
+      "!**/dist",
+      "!**/dist-bundle",
+      "!**/*.lockb",
+      "!**/*.svg"
+    ]
   },
   "formatter": {
     "enabled": true,
