@@ -25,7 +25,7 @@ export const PROJECT_FEATURES = {
         enabled_by_default: false,
         dependsOn: [],
     },
-    DATABASE_MANAGEMENT_FEATURE: {
+    [DATABASE_MANAGEMENT_FEATURE]: {
         name: DATABASE_MANAGEMENT_FEATURE,
         description: "PostgreSQL database for data persistence and SQL operations",
         category: "core",

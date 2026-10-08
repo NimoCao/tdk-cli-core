@@ -78,7 +78,7 @@ function specMasterHasDatabaseManagement(projectRoot) {
     const text = readTextIfExists(path);
     if (text === undefined)
         return undefined;
-    // PRE_ALPHA/DEFAULTS style: DATABASE_MANAGEMENT_FEATURE: True
+    // PRE_ALPHA/DEFAULTS style: "database-management": True
     return /"database-management"\s*:\s*True/.test(text);
 }
 function generatedDefaultFocusEnablesDatabaseManagement(projectRoot) {

@@ -109,7 +109,7 @@ function specMasterHasDatabaseManagement(projectRoot: string): boolean | undefin
   const path = join(projectRoot, ".tdk", ".tdk-out", "spec.master");
   const text = readTextIfExists(path);
   if (text === undefined) return undefined;
-  // PRE_ALPHA/DEFAULTS style: DATABASE_MANAGEMENT_FEATURE: True
+  // PRE_ALPHA/DEFAULTS style: "database-management": True
   return /"database-management"\s*:\s*True/.test(text);
 }
 

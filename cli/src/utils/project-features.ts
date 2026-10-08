@@ -47,7 +47,7 @@ export const PROJECT_FEATURES: Record<string, ProjectFeature> = {
     dependsOn: [],
   },
 
-  DATABASE_MANAGEMENT_FEATURE: {
+  [DATABASE_MANAGEMENT_FEATURE]: {
     name: DATABASE_MANAGEMENT_FEATURE,
     description: "PostgreSQL database for data persistence and SQL operations",
     category: "core",
