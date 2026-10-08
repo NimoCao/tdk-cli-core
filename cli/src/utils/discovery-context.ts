@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import type { DiscoveredResource, DiscoveryContext } from "../types/index.js";
 import { createCacheValidator } from "./cache.js";
 import { findProjectRoot } from "./paths.js";

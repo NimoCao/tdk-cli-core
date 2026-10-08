@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import type { CacheEntry, CacheOptions } from "../types/index.js";
 
 export class Cache<T> {

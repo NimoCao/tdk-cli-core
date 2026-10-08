@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import type { BackendLanguageProvider } from "./types.js";
 
 export function getBackendIndexTemplate(name: string) {

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import type { CheckResult } from "../types/index.js";
 import type { HostInfo } from "./agent-host.js";
 import type { HostPortPlan } from "./host-port-plan.js";

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { Command } from "commander";
 import { Box, render, Text, useApp, useInput, useStdin, useStdout } from "ink";
 import type React from "react";

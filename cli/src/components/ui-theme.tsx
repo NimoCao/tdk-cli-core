@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { createContext, useContext } from "react";
 import type { FileType } from "../types/index.js";
 

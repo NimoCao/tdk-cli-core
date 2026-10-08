@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { PassThrough } from "node:stream";
 import { render } from "ink";
 import { expect, it, vi } from "vitest";

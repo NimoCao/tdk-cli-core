@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 // Covers the exact three scenarios demonstrated manually on the real CLI:
 //   1. no TDK_LICENSE_KEY set          -> free tier, zero network calls
 //   2. TDK_LICENSE_KEY set but invalid -> "no premium resources unlocked", free tier

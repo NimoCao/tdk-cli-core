@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { describe, expect, it } from "vitest";
 import { MIN_BUN_VERSION, versionMeetsMinimum } from "../../commands/doctor.js";
 import { BUN_FLOOR_LABEL, bunMeetsFloor } from "../bun-floor.js";

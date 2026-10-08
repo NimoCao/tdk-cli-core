@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { Box, measureElement, Text, useInput } from "ink";
 import type React from "react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";

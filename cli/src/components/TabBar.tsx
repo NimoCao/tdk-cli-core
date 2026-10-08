@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { Box, Text } from "ink";
 import type React from "react";
 import type { TabBarProps } from "../types/index.js";

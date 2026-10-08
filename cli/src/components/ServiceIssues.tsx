@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { Box, Text } from "ink";
 import type { ResourceMetadata } from "../types/index.js";
 import { useTUITheme } from "./ui-theme.js";

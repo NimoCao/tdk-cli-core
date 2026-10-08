@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { describe, expect, it } from "vitest";
 import { errorFactories } from "../errors.js";
 import { toMachineError } from "../machine-output.js";

@@ -26,6 +26,17 @@ bun run typecheck && bun run lint && bun run test   # about a minute; all of it 
 
 If one of these fails on a clean checkout, that is a bug in the project, not in your setup: please [open an issue](https://github.com/tdk-landscape/tdk-cli-core/issues/new/choose).
 
+## Code review
+
+Every change goes through a pull request. Before a pull request is merged:
+
+- The required checks pass: lint, typecheck, tests and fuzz (see `.github/workflows/ci.yml`).
+- At least one person other than the author has reviewed the change. Authors cannot approve their own pull requests.
+- The reviewer checks that the change does what the linked issue asks, that it has tests (see [Tests](#tests)), and that it does not weaken security checks or validation.
+- Review comments that request changes are resolved before merge, or the author explains why they do not apply.
+
+The full steps for reviewers, including what to look at, are in [docs/contributing/04-review-a-pr.md](docs/contributing/04-review-a-pr.md#who-can-approve-and-merge).
+
 ## Tests
 
 Every new feature or behavior change needs automated tests in the same pull request. Put tests next to the code they cover, or in the existing suite for that area (`cli/src/**/__tests__/`, `tests/fuzz/`). A bug fix adds a test that fails before the fix and passes after it. If a test is not practical, the pull request says why and links an issue that tracks adding it. Reviewers check this in every pull request, and the checks listed in [03-open-a-pr.md](docs/contributing/03-open-a-pr.md#run-the-checks-for-your-change) run the suite in CI.

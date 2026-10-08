@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import type { ResourceStatus } from "../types/index.js";
 import { buildStartupReport, transitiveDependencies } from "./startup-report.js";
 import { effectiveRuntimeStatus, isTiltResourcePending } from "./tilt-resource-state.js";

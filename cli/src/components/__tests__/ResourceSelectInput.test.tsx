@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { PassThrough } from "node:stream";
 import { Box, render, renderToString, Text } from "ink";
 import { describe, expect, it } from "vitest";

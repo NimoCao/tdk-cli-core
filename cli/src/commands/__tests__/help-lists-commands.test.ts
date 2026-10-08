@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 /// <reference types="vite/client" />
 
 import { readFileSync } from "node:fs";

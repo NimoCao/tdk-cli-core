@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 export type TabBarDensity = "compact" | "standard" | "wide";
 
 const COMPACT_TAB_WIDTH = 76;

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import type { ResourceStatus, StackHealthStatus } from "../types/index.js";
 
 /**

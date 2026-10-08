@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 export interface ProjectTemplate {
   repo: string;
   description: string;

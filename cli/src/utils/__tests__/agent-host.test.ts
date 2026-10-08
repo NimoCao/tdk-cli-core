@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { describe, expect, it } from "vitest";
 import { hostUpRefusal } from "../../commands/up.js";
 import { detectHost, type HostProbeInputs } from "../agent-host.js";

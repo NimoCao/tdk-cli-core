@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 /**
  * A Tilt resource that is not built and running yet: still waiting (`pending`, `none`) or building right now
  * (`in_progress`). Readiness must treat all of these as not ready.

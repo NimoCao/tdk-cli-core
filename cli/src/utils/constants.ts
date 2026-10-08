@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import type { ResourceType } from "../types/index.js";
 
 export const MASTER_CONFIG_FILES = [

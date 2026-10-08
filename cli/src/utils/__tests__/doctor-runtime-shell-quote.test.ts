@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { execFileSync } from "node:child_process";
 import { describe, expect, it } from "vitest";
 import { shellQuote } from "../doctor-runtime.js";

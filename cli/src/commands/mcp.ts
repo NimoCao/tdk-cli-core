@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { createInterface } from "node:readline";
 import { Command } from "commander";
 import { createMcpServer } from "../mcp/server.js";

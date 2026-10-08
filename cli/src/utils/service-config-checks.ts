@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { relative } from "node:path";
 import chalk from "chalk";
 import type { CheckResult, DiscoveredResource } from "../types/index.js";

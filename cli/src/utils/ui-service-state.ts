@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import type { DiscoveredResource, StackMetadata } from "../types/index.js";
 import { getDeferredResourceNames } from "./doctor-runtime.js";
 import { deriveServiceStates, type ServiceRuntimeState } from "./service-runtime-state.js";

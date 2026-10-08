@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 export interface LogLine {
   time: string | null;
   resource: string | null;

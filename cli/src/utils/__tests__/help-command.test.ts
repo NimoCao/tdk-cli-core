@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { Command } from "commander";
 import { describe, expect, it } from "vitest";
 import { unknownHelpTarget } from "../help-command.js";

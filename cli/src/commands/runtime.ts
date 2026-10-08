@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { statSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { Command } from "commander";

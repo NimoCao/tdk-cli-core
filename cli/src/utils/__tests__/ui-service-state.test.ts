@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { DiscoveredResource, ResourceMetadata, StackMetadata } from "../../types/index.js";
 import { applyServiceStates, fetchServiceStates } from "../ui-service-state.js";

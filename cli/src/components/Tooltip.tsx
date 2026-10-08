@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 export const TOOLTIPS = {
   overviewTab: "View all stacks and their resources",
   resourcesTab: "Detailed resource list with metadata",

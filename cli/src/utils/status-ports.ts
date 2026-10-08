@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import type { DiscoveredResource } from "../types/index.js";
 import { STANDARD_PORTS } from "./constants.js";
 import type { HostPortPlan } from "./host-port-plan.js";

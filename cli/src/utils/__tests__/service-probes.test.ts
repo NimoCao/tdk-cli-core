@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { describe, expect, it } from "vitest";
 import { summarizeServiceProbes } from "../doctor-runtime.js";
 import type { HealthProbe } from "../service-urls.js";

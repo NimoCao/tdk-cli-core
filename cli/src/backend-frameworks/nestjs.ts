@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import type { BackendFrameworkProvider } from "./types.js";
 
 export function getNestIndexTemplate(name: string) {

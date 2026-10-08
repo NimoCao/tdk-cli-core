@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { renderToString } from "ink";
 import { createElement, Fragment } from "react";
 import { describe, expect, it } from "vitest";

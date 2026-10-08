@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { createServer } from "node:net";
 import { describe, expect, it } from "vitest";
 import { checkHostPorts, probeHostPort } from "../doctor-runtime.js";

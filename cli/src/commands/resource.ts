@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { existsSync, mkdirSync } from "node:fs";
 import { isAbsolute, relative, resolve } from "node:path";
 import chalk from "chalk";

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import chalk from "chalk";
 import { QUICKSTART_DOCS_URL } from "./constants.js";
 import { getContainerRuntimeStatus } from "./docker.js";

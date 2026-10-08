@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { EventEmitter } from "node:events";
 import { describe, expect, it, vi } from "vitest";
 import { IMPORT_PACKAGE, importCommand, importInvocation, runImport } from "../import.js";

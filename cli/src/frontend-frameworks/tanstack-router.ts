@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import type { FrontendFrameworkProvider } from "./types.js";
 
 // A client-side Vite SPA using TanStack Router with code-based routes. It shares the React toolchain (same Vite config, JSX

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { existsSync, lstatSync } from "node:fs";
 import { isAbsolute, normalize, relative, sep } from "node:path";
 

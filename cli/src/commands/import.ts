@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { type SpawnOptions, spawn } from "node:child_process";
 import { Command } from "commander";
 

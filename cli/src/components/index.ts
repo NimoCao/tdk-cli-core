@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 export { AccessibleTooltip } from "./Accessible.js";
 export { DetailPanel } from "./DetailPanel.js";
 export { FileTree } from "./FileTree.js";

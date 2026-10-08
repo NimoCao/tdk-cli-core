@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { createServer, type Server } from "node:net";
 import { afterEach, describe, expect, it } from "vitest";
 import { isHostPortAvailable } from "../host-port-plan.js";

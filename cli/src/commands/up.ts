@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { connect } from "node:net";
 import { join } from "node:path";
 import chalk from "chalk";

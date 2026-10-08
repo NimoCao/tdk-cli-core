@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { parseTiltResourceFailures, summarizeTiltBuildError } from "./doctor-runtime.js";
 import { portConflictFix } from "./port-conflict-fix.js";
 import { effectiveRuntimeStatus, isTiltResourcePending } from "./tilt-resource-state.js";

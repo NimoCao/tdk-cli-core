@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { execFileSync } from "node:child_process";
 import { lookup } from "node:dns/promises";
 import type { CheckResult } from "../types/index.js";

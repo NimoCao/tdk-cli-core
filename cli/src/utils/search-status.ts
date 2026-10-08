@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 export interface SearchStatus {
   /** Muted suffix shown after the query, e.g. `2 of 5` or `0 matches`. */
   summary: string;

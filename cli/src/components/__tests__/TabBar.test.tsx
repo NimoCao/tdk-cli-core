@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { renderToString } from "ink";
 import { describe, expect, it } from "vitest";
 import { TabBar } from "../TabBar.js";

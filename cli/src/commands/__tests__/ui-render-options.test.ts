@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { expect, it, vi } from "vitest";
 
 const { renderMock, isTiltAvailableMock, requireProjectRootMock } = vi.hoisted(() => ({

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 // Fetches the paid-tier "premium" resource bundle (playwright, c4-diagram,
 // logging, agents-md, sablier, verdaccio, and a few other extras - see
 // tdk-cli-extensions/premium/) from the gated distribution worker, when a
