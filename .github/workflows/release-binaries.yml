@@ -196,6 +196,7 @@ jobs:
     needs: [build, windows-smoke]
     runs-on: ubuntu-latest
     permissions:
+      attestations: write
       contents: write
       id-token: write
       issues: write
@@ -374,3 +375,23 @@ jobs:
               --notes "Signed checksums for tdk ${VERSION}. The binaries are on https://github.com/tdk-landscape/tdk-cli-releases/releases/tag/v${VERSION} and the npm package is @tdk-landscape/tdk-cli-core@${VERSION}. Verify with: cosign verify-blob --bundle checksums.txt.sigstore.json --certificate-identity-regexp 'https://github.com/tdk-landscape/tdk-cli-core/.github/workflows/release-binaries.yml@.*' --certificate-oidc-issuer https://token.actions.githubusercontent.com checksums.txt" \
               checksums.txt checksums.txt.sigstore.json
           fi
+
+      # SLSA build provenance for the checksums (a GitHub attestation tied to this workflow run), attached to the release as
+      # checksums.txt.intoto.jsonl. Untested until the next release runs: Scorecard's Signed-Releases check then needs
+      # provenance on the last five releases, so the score moves gradually. Like the signature, it can never block a release.
+      - name: Attest build provenance for the checksums
+        continue-on-error: true
+        uses: actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be # v2.4.0
+        with:
+          subject-path: checksums.txt
+
+      - name: Attach the provenance to the release in this repository
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.build.outputs.version }}
+        run: |
+          set -euo pipefail
+          gh attestation download checksums.txt --repo "$GITHUB_REPOSITORY"
+          mv sha256:*.jsonl checksums.txt.intoto.jsonl
+          gh release upload "v${VERSION}" --repo "$GITHUB_REPOSITORY" --clobber checksums.txt.intoto.jsonl
