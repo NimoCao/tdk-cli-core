@@ -15,7 +15,11 @@ import {
   WEBCONTAINER_UP_MESSAGE,
 } from "../utils/agent-host.js";
 import { projectNeedsBun } from "../utils/bun-requirement.js";
-import { MASTER_CONFIG_FILES, REQUIRED_PACKAGE_SCRIPTS } from "../utils/constants.js";
+import {
+  CONTAINER_RUNTIME_CHECK,
+  MASTER_CONFIG_FILES,
+  REQUIRED_PACKAGE_SCRIPTS,
+} from "../utils/constants.js";
 import { isPathDiscovered, readDiscoveryPaths } from "../utils/discovery-paths.js";
 import {
   collectDoctorChecks,
@@ -248,13 +252,13 @@ export async function checkDockerRuntime(): Promise<CheckResult> {
     try {
       await execAsync("docker ps", EXEC_TIMEOUT_MS);
       return {
-        name: "Container Runtime",
+        name: CONTAINER_RUNTIME_CHECK,
         didPass: true,
         message: "Docker Desktop Linux container engine is running",
       };
     } catch {
       return {
-        name: "Container Runtime",
+        name: CONTAINER_RUNTIME_CHECK,
         didPass: false,
         message: "Docker is not running",
         fix: DOCTOR_FIXES.dockerDaemonDown,
@@ -266,14 +270,14 @@ export async function checkDockerRuntime(): Promise<CheckResult> {
   try {
     await execAsync("docker ps", EXEC_TIMEOUT_MS);
     return {
-      name: "Container Runtime",
+      name: CONTAINER_RUNTIME_CHECK,
       didPass: true,
       message: "Docker daemon is running",
     };
   } catch (err) {
     if (isTimeout(err)) {
       return {
-        name: "Container Runtime",
+        name: CONTAINER_RUNTIME_CHECK,
         didPass: false,
         message: "Docker daemon is not responding",
         fix: DOCTOR_FIXES.dockerDaemonDown,
@@ -284,14 +288,14 @@ export async function checkDockerRuntime(): Promise<CheckResult> {
   // Docker not running: check for Colima, then Podman
   if (await succeeds("colima status")) {
     return {
-      name: "Container Runtime",
+      name: CONTAINER_RUNTIME_CHECK,
       didPass: true,
       message: "Colima (Docker runtime) is running",
     };
   }
   if (findOnPath("colima")) {
     return {
-      name: "Container Runtime",
+      name: CONTAINER_RUNTIME_CHECK,
       didPass: false,
       message: "Colima is installed but not running",
       fix: DOCTOR_FIXES.dockerDaemonDown,
@@ -299,7 +303,7 @@ export async function checkDockerRuntime(): Promise<CheckResult> {
   }
   if (await succeeds("podman ps")) {
     return {
-      name: "Container Runtime",
+      name: CONTAINER_RUNTIME_CHECK,
       didPass: true,
       message: "Podman is running",
     };
@@ -307,7 +311,7 @@ export async function checkDockerRuntime(): Promise<CheckResult> {
 
   if (hasDockerCli) {
     return {
-      name: "Container Runtime",
+      name: CONTAINER_RUNTIME_CHECK,
       didPass: false,
       message: "Docker daemon is not running",
       fix: DOCTOR_FIXES.dockerDaemonDown,
@@ -315,7 +319,7 @@ export async function checkDockerRuntime(): Promise<CheckResult> {
   }
 
   return {
-    name: "Container Runtime",
+    name: CONTAINER_RUNTIME_CHECK,
     didPass: false,
     message: "Docker is not running",
     fix: DOCTOR_FIXES.dockerMissing,
@@ -1333,7 +1337,7 @@ export const doctorCommand = new Command("doctor")
     );
     if (isContainerHost(host.kind)) {
       for (const result of results) {
-        if (result.name === "Container Runtime" && !result.didPass) {
+        if (result.name === CONTAINER_RUNTIME_CHECK && !result.didPass) {
           result.fix = DEVCONTAINER_DOCKER_FIX;
         }
       }

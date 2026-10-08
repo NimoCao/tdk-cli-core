@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 import type { CheckResult } from "../types/index.js";
 import type { HostInfo } from "./agent-host.js";
+import { CONTAINER_RUNTIME_CHECK } from "./constants.js";
 import type { HostPortPlan } from "./host-port-plan.js";
 
 export interface DoctorError {
@@ -54,7 +55,7 @@ export async function collectDoctorChecks(
 }
 
 function containerRuntimeReachable(checks: CheckResult[]): boolean | null {
-  const runtime = checks.find((check) => check.name === "Container Runtime");
+  const runtime = checks.find((check) => check.name === CONTAINER_RUNTIME_CHECK);
   return runtime ? runtime.didPass : null;
 }
 
