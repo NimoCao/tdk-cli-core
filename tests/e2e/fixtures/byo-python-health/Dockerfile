@@ -3,4 +3,6 @@ WORKDIR /app
 COPY app.py .
 ENV PORT=4500
 EXPOSE 4500
+RUN groupadd --gid 1000 app && useradd --uid 1000 --gid app --no-create-home app
+USER app
 CMD ["python", "app.py"]

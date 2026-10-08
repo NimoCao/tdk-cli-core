@@ -1,3 +1,4 @@
+import { CONTAINER_RUNTIME_CHECK } from "./constants.js";
 /** Wait for concurrent probes to finish even if one throws, so they can release resources. */
 export async function collectDoctorChecks(machineChecks, projectChecks) {
     const checks = [];
@@ -21,7 +22,7 @@ export async function collectDoctorChecks(machineChecks, projectChecks) {
     return { checks, errors };
 }
 function containerRuntimeReachable(checks) {
-    const runtime = checks.find((check) => check.name === "Container Runtime");
+    const runtime = checks.find((check) => check.name === CONTAINER_RUNTIME_CHECK);
     return runtime ? runtime.didPass : null;
 }
 /** Produce the same readiness decision for human and machine consumers. */

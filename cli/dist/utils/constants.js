@@ -1,3 +1,7 @@
+// Name of the doctor check that verifies a container runtime is reachable.
+// It is looked up by name in doctor-report.ts, so both sides must use this
+// constant instead of a bare string literal.
+export const CONTAINER_RUNTIME_CHECK = "Container Runtime";
 export const MASTER_CONFIG_FILES = [
     "TILT_TECH_STACK.star",
     "TILT_RESOURCE_DEFAULTS.star",

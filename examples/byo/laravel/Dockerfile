@@ -7,6 +7,9 @@ FROM php:8.4-cli@sha256:1d2cf2b7d715b5b3aa959f0150ccbcc7b71e0181b637e443abf40a7f
 RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends unzip git >/dev/null && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY --from=build /work/app /app
+RUN groupadd --gid 1000 app && useradd --uid 1000 --gid app --no-create-home app
+RUN chown -R app:app /app
+USER app
 # create-project already wrote .env with an APP_KEY and created database/database.sqlite.
 # artisan serve must listen beyond loopback (--host) and on the port TDK assigns.
 CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=${PORT:-8000}"]

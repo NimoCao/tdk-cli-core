@@ -11,5 +11,7 @@ RUN mvn -q -B -DskipTests package && ls target/quarkus-app
 FROM eclipse-temurin:21-jre@sha256:cff19e6215689161eb6162c11b86b0c60ddf802164f2eaf48d570f8fb79a36c5
 WORKDIR /app
 COPY --from=build /work/app/target/quarkus-app/ /app/
+RUN groupadd --gid 1000 app && useradd --uid 1000 --gid app --no-create-home app
+USER app
 # Quarkus listens on 0.0.0.0 by default in a packaged jar; the port comes from QUARKUS_HTTP_PORT, set from TDK's PORT.
 CMD ["sh", "-c", "QUARKUS_HTTP_PORT=${PORT:-8080} exec java -jar /app/quarkus-run.jar"]

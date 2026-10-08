@@ -7,5 +7,7 @@ RUN dotnet new web --name App --output . --no-restore \
 FROM mcr.microsoft.com/dotnet/aspnet:9.0@sha256:6b29f9d598b387b4b44653408d773cbdbf8f1d6b24289460b228a24f31a38b53
 WORKDIR /app
 COPY --from=build /out .
+RUN groupadd --gid 1000 app && useradd --uid 1000 --gid app --no-create-home app
+USER app
 # Kestrel must listen beyond loopback (0.0.0.0) and on the port TDK assigns.
 CMD ["sh", "-c", "ASPNETCORE_URLS=http://0.0.0.0:${PORT:-8080} exec dotnet App.dll"]

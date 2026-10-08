@@ -7,5 +7,7 @@ WORKDIR /work
 RUN npx --yes create-docusaurus@latest app classic --typescript --skip-install </dev/null
 WORKDIR /work/app
 RUN npm install --no-audit --no-fund
+RUN chown -R node:node .
+USER node
 # The dev server must listen beyond loopback (--host) and on the port TDK assigns.
 CMD ["sh", "-c", "npx docusaurus start --host 0.0.0.0 --port ${PORT:-3000} --no-open"]

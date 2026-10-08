@@ -6,4 +6,6 @@ RUN npm install --omit=dev --no-audit --no-fund
 COPY server.mjs ./
 # Override at run time if the Turso resource has another name or port.
 ENV LIBSQL_URL=http://turso:4500
+RUN chown -R node:node .
+USER node
 CMD ["node", "server.mjs"]

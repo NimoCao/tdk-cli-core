@@ -8,7 +8,7 @@ import { Command } from "commander";
 import { hasVerdaccioLicense } from "../generator/extension-fetch.js";
 import { DEVCONTAINER_DOCKER_FIX, detectHost, isContainerHost, WEBCONTAINER_DOCS, WEBCONTAINER_UP_MESSAGE, } from "../utils/agent-host.js";
 import { projectNeedsBun } from "../utils/bun-requirement.js";
-import { MASTER_CONFIG_FILES, REQUIRED_PACKAGE_SCRIPTS } from "../utils/constants.js";
+import { CONTAINER_RUNTIME_CHECK, MASTER_CONFIG_FILES, REQUIRED_PACKAGE_SCRIPTS, } from "../utils/constants.js";
 import { isPathDiscovered, readDiscoveryPaths } from "../utils/discovery-paths.js";
 import { collectDoctorChecks, createDoctorReport, getDoctorExitCode, } from "../utils/doctor-report.js";
 import { checkHealthRoutes, checkIngressPorts, checkPrivateNpmRegistry, checkTiltResourceHealth, projectConfigEnablesVerdaccio, summarizeServiceProbes, } from "../utils/doctor-runtime.js";
@@ -169,14 +169,14 @@ export async function checkDockerRuntime() {
         try {
             await execAsync("docker ps", EXEC_TIMEOUT_MS);
             return {
-                name: "Container Runtime",
+                name: CONTAINER_RUNTIME_CHECK,
                 didPass: true,
                 message: "Docker Desktop Linux container engine is running",
             };
         }
         catch {
             return {
-                name: "Container Runtime",
+                name: CONTAINER_RUNTIME_CHECK,
                 didPass: false,
                 message: "Docker is not running",
                 fix: DOCTOR_FIXES.dockerDaemonDown,
@@ -187,7 +187,7 @@ export async function checkDockerRuntime() {
     try {
         await execAsync("docker ps", EXEC_TIMEOUT_MS);
         return {
-            name: "Container Runtime",
+            name: CONTAINER_RUNTIME_CHECK,
             didPass: true,
             message: "Docker daemon is running",
         };
@@ -195,7 +195,7 @@ export async function checkDockerRuntime() {
     catch (err) {
         if (isTimeout(err)) {
             return {
-                name: "Container Runtime",
+                name: CONTAINER_RUNTIME_CHECK,
                 didPass: false,
                 message: "Docker daemon is not responding",
                 fix: DOCTOR_FIXES.dockerDaemonDown,
@@ -205,14 +205,14 @@ export async function checkDockerRuntime() {
     // Docker not running: check for Colima, then Podman
     if (await succeeds("colima status")) {
         return {
-            name: "Container Runtime",
+            name: CONTAINER_RUNTIME_CHECK,
             didPass: true,
             message: "Colima (Docker runtime) is running",
         };
     }
     if (findOnPath("colima")) {
         return {
-            name: "Container Runtime",
+            name: CONTAINER_RUNTIME_CHECK,
             didPass: false,
             message: "Colima is installed but not running",
             fix: DOCTOR_FIXES.dockerDaemonDown,
@@ -220,21 +220,21 @@ export async function checkDockerRuntime() {
     }
     if (await succeeds("podman ps")) {
         return {
-            name: "Container Runtime",
+            name: CONTAINER_RUNTIME_CHECK,
             didPass: true,
             message: "Podman is running",
         };
     }
     if (hasDockerCli) {
         return {
-            name: "Container Runtime",
+            name: CONTAINER_RUNTIME_CHECK,
             didPass: false,
             message: "Docker daemon is not running",
             fix: DOCTOR_FIXES.dockerDaemonDown,
         };
     }
     return {
-        name: "Container Runtime",
+        name: CONTAINER_RUNTIME_CHECK,
         didPass: false,
         message: "Docker is not running",
         fix: DOCTOR_FIXES.dockerMissing,
@@ -1089,7 +1089,7 @@ export const doctorCommand = new Command("doctor")
     const { checks: results, errors } = await collectDoctorChecks(machineChecks, inProject ? projectChecks : []);
     if (isContainerHost(host.kind)) {
         for (const result of results) {
-            if (result.name === "Container Runtime" && !result.didPass) {
+            if (result.name === CONTAINER_RUNTIME_CHECK && !result.didPass) {
                 result.fix = DEVCONTAINER_DOCKER_FIX;
             }
         }

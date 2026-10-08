@@ -5,4 +5,7 @@ RUN bun create hono@latest app --template bun --install --pm bun
 WORKDIR /work/app
 # The template exports the app (`export default app`) and Bun serves it, reading PORT itself, so nothing needs patching.
 # `bun run dev` is `bun run --hot src/index.ts`.
+RUN groupadd --gid 1000 app && useradd --uid 1000 --gid app --no-create-home app
+RUN chown -R app:app /work/app
+USER app
 CMD ["bun", "run", "dev"]

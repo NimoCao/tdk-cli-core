@@ -11,4 +11,7 @@ RUN uv sync --frozen
 ENV PATH="/work/app/.venv/bin:$PATH"
 COPY tdk_settings.py config/settings/tdk.py
 COPY ensure_db.py entrypoint.sh /
+RUN groupadd --gid 1000 app && useradd --uid 1000 --gid app --no-create-home app
+RUN chown -R app:app /work
+USER app
 CMD ["sh", "/entrypoint.sh"]
