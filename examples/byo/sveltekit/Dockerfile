@@ -4,5 +4,8 @@ WORKDIR /work
 RUN npx --yes sv@latest create app --template minimal --types ts --no-add-ons --no-install </dev/null
 WORKDIR /work/app
 RUN npm install
+RUN chown -R node:node .
+USER node
+HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=3 CMD nc -z 127.0.0.1 ${PORT:-5173} || exit 1
 # The dev server is Vite: listen beyond loopback (--host) and on the port TDK assigns.
 CMD ["sh", "-c", "npx vite dev --host 0.0.0.0 --port ${PORT:-5173}"]
