@@ -43,6 +43,8 @@ Docker runs the containers. Tilt watches services and live-updates containers wh
 
 No teams are listed yet. Be the first: [tell us you use TDK](https://github.com/tdk-landscape/tdk-cli-core/issues/new?template=we-use-tdk.yml) or [add a row to ADOPTERS.md](ADOPTERS.md).
 
+If TDK saves you time, a ⭐ on [this repo](https://github.com/tdk-landscape/tdk-cli-core) helps other developers find it.
+
 ## Quick start
 
 ```bash
