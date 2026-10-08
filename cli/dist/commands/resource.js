@@ -12,6 +12,7 @@ import { hasDddLicense } from "../generator/extension-fetch.js";
 import { getDockerfileTemplate, getTestTemplate, getWorkerIndexTemplate, } from "../generator/resource-templates.js";
 import { CREATABLE_RESOURCE_TYPES } from "../types/index.js";
 import { assertValid, confirmOrCancel } from "../utils/command-helpers.js";
+import { SERVICE_JSON } from "../utils/constants.js";
 import { chooseResourcePath, isPathDiscovered, readDiscoveryPaths, } from "../utils/discovery-paths.js";
 import { errorFactories, requireProjectRoot, runCommand, TdkError } from "../utils/errors.js";
 import { writeFilesWithProgress } from "../utils/file-helpers.js";
@@ -434,7 +435,7 @@ export const resourceCommand = new Command("resource")
         }
         // Check if resource already exists
         const isExistingResource = existsSync(fullPath);
-        const hasServiceJson = existsSync(resolve(fullPath, "service.json"));
+        const hasServiceJson = existsSync(resolve(fullPath, SERVICE_JSON));
         if (resourceType === "sdk" && !hasServiceJson) {
             throw new TdkError(`No service.json in ${finalResourcePath}`, [
                 'Add one with "appType": "sdk", then run this again to register it',
@@ -483,7 +484,7 @@ export const resourceCommand = new Command("resource")
         if (shouldRegisterExisting && hasServiceJson) {
             // Read existing service.json
             const { readFileSync } = await import("node:fs");
-            const existingServiceJsonPath = resolve(fullPath, "service.json");
+            const existingServiceJsonPath = resolve(fullPath, SERVICE_JSON);
             const existingContent = readFileSync(existingServiceJsonPath, "utf-8");
             const existingServiceJson = JSON.parse(existingContent);
             // Update with new values while preserving existing fields
@@ -528,7 +529,7 @@ export const resourceCommand = new Command("resource")
                 ...(options.restart ? { restart: options.restart } : {}),
             });
             const { writeFileSync } = await import("node:fs");
-            writeFileSync(resolve(fullPath, "service.json"), JSON.stringify(byoServiceJson, null, 2));
+            writeFileSync(resolve(fullPath, SERVICE_JSON), JSON.stringify(byoServiceJson, null, 2));
             // Create Dockerfile stub if no image provided and dockerfile doesn't exist
             if (!options.image && !existsSync(dockerfilePath)) {
                 mkdirSync(resolve(dockerfilePath, ".."), { recursive: true });
@@ -599,7 +600,7 @@ This file contains the resource configuration for TDK.
         const tasks = [
             {
                 type: "json",
-                filename: "service.json",
+                filename: SERVICE_JSON,
                 content: serviceJson,
                 description: "Generating service.json",
                 emoji: "📝",
@@ -676,7 +677,7 @@ This file contains the resource configuration for TDK.
         const languageFiles = backendLanguage?.createFiles?.(resourceName);
         if (languageFiles) {
             const owned = new Set(languageFiles.map((file) => file.filename));
-            const sharedTasks = tasks.filter((task) => task.filename === "service.json" ||
+            const sharedTasks = tasks.filter((task) => task.filename === SERVICE_JSON ||
                 !(owned.has(task.filename) ||
                     task.filename === "Dockerfile" ||
                     task.filename === "src/index.ts" ||
@@ -715,7 +716,7 @@ This file contains the resource configuration for TDK.
             writeFilesWithProgress(migratorPath, [
                 {
                     type: "json",
-                    filename: "service.json",
+                    filename: SERVICE_JSON,
                     content: migratorConfig,
                     description: "Generating Prisma migrator manifest",
                     emoji: "🗃️",
