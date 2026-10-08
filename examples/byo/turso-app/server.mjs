@@ -4,6 +4,8 @@ import { createClient } from "@libsql/client";
 // Where Turso's server (examples/byo/turso) listens on the landscape's Docker network.
 const url = process.env.LIBSQL_URL ?? "http://turso:4500";
 const db = createClient({ url });
+// Report only the host: the full URL can carry an auth token.
+const dbHost = new URL(url).host;
 
 // /health is a real round trip: it creates a table, writes a row and reads it back, so a 200 means the database answered.
 async function roundTrip() {
@@ -18,10 +20,12 @@ createServer(async (req, res) => {
   if (req.url === "/health" || req.url === "/") {
     try {
       const visits = await roundTrip();
-      res.end(JSON.stringify({ status: "ok", database: url, visits }));
+      res.end(JSON.stringify({ status: "ok", database: dbHost, visits }));
     } catch (error) {
+      // Keep driver details in the server log; the response carries no stack trace or connection string.
+      console.error("health check failed:", error);
       res.statusCode = 503;
-      res.end(JSON.stringify({ status: "error", database: url, message: String(error.message ?? error) }));
+      res.end(JSON.stringify({ status: "error", database: dbHost, message: "database unavailable" }));
     }
     return;
   }
