@@ -1,1 +1,1 @@
-{"version":3,"file":"mcp.d.ts","sourceRoot":"","sources":["../../src/commands/mcp.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,OAAO,EAAE,MAAM,WAAW,CAAC;AAKpC,eAAO,MAAM,UAAU,SAgBnB,CAAC"}
+{"version":3,"file":"mcp.d.ts","sourceRoot":"","sources":["../../src/commands/mcp.ts"],"names":[],"mappings":"AAGA,OAAO,EAAE,OAAO,EAAE,MAAM,WAAW,CAAC;AAKpC,eAAO,MAAM,UAAU,SAgBnB,CAAC"}

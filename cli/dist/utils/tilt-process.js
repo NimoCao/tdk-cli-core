@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { execFileSync } from "node:child_process";
 const run = (command, args) => execFileSync(command, args, { encoding: "utf-8", stdio: "pipe", windowsHide: true });
 /** Refuse to target arbitrary listeners: only stop a Tilt process on the requested UI port. */

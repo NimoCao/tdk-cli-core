@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { delimiter, extname } from "node:path";
 export function isWindows() {
     return process.platform === "win32";

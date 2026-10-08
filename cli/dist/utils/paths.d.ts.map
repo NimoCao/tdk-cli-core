@@ -1,1 +1,1 @@
-{"version":3,"file":"paths.d.ts","sourceRoot":"","sources":["../../src/utils/paths.ts"],"names":[],"mappings":"AAMA,wBAAgB,eAAe,CAAC,QAAQ,GAAE,MAAc,GAAG,MAAM,GAAG,IAAI,CAiBvE;AA2BD,wBAAgB,iBAAiB,IAAI,MAAM,CAE1C"}
+{"version":3,"file":"paths.d.ts","sourceRoot":"","sources":["../../src/utils/paths.ts"],"names":[],"mappings":"AAQA,wBAAgB,eAAe,CAAC,QAAQ,GAAE,MAAc,GAAG,MAAM,GAAG,IAAI,CAiBvE;AA2BD,wBAAgB,iBAAiB,IAAI,MAAM,CAE1C"}

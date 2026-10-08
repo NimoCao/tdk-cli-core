@@ -1,4 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { Box, Text } from "ink";
 import { useTUITheme } from "./ui-theme.js";
 export const BaseTooltip = ({ content, shortcut, visible, maxWidth = 40, wrapText = false, prefix = "", marginTop = 0, }) => {

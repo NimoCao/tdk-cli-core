@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { writeSync } from "node:fs";
 /**
  * Returns an emitter that writes at most one `{schemaVersion, data, errors}` object to stdout. If the process

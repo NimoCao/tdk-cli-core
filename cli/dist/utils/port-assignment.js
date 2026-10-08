@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { createConnection, createServer } from "node:net";
 import { PORT_RANGES } from "./constants.js";
 function isPortAvailable(port) {

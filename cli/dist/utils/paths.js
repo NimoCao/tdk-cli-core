@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { existsSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { cwd } from "node:process";

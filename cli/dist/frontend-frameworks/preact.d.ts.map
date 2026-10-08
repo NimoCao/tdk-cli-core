@@ -1,1 +1,1 @@
-{"version":3,"file":"preact.d.ts","sourceRoot":"","sources":["../../src/frontend-frameworks/preact.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,yBAAyB,EAAE,MAAM,YAAY,CAAC;AAE5D,eAAO,MAAM,sBAAsB,EAAE,yBA6DpC,CAAC"}
+{"version":3,"file":"preact.d.ts","sourceRoot":"","sources":["../../src/frontend-frameworks/preact.ts"],"names":[],"mappings":"AAEA,OAAO,KAAK,EAAE,yBAAyB,EAAE,MAAM,YAAY,CAAC;AAE5D,eAAO,MAAM,sBAAsB,EAAE,yBA6DpC,CAAC"}

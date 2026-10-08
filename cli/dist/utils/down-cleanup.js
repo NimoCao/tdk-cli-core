@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { execFileSync } from "node:child_process";
 const run = (command, args) => execFileSync(command, args, { encoding: "utf-8", stdio: "pipe", windowsHide: true });
 /** Network names the engine creates per project (see engine/.../docker/constants.star and init-networks). */

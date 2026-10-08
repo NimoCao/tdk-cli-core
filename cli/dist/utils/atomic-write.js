@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { randomBytes } from "node:crypto";
 import { closeSync, fchmodSync, fsyncSync, openSync, renameSync, rmSync, statSync, writeFileSync, } from "node:fs";
 import { basename, dirname, join } from "node:path";

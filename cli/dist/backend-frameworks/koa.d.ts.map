@@ -1,1 +1,1 @@
-{"version":3,"file":"koa.d.ts","sourceRoot":"","sources":["../../src/backend-frameworks/koa.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,wBAAwB,EAAE,MAAM,YAAY,CAAC;AAE3D,wBAAgB,mBAAmB,CAAC,IAAI,EAAE,MAAM,UAuC/C;AAED,eAAO,MAAM,kBAAkB,EAAE,wBAMhC,CAAC"}
+{"version":3,"file":"koa.d.ts","sourceRoot":"","sources":["../../src/backend-frameworks/koa.ts"],"names":[],"mappings":"AAEA,OAAO,KAAK,EAAE,wBAAwB,EAAE,MAAM,YAAY,CAAC;AAE3D,wBAAgB,mBAAmB,CAAC,IAAI,EAAE,MAAM,UAuC/C;AAED,eAAO,MAAM,kBAAkB,EAAE,wBAMhC,CAAC"}

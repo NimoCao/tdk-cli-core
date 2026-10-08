@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { isValidPort } from "./validation.js";
 export function parseTiltPort(value) {
     if (value === undefined || value === "")

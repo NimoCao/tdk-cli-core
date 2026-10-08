@@ -1,1 +1,1 @@
-{"version":3,"file":"vue.d.ts","sourceRoot":"","sources":["../../src/frontend-frameworks/vue.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,yBAAyB,EAAE,MAAM,YAAY,CAAC;AAE5D,eAAO,MAAM,mBAAmB,EAAE,yBAuEjC,CAAC"}
+{"version":3,"file":"vue.d.ts","sourceRoot":"","sources":["../../src/frontend-frameworks/vue.ts"],"names":[],"mappings":"AAEA,OAAO,KAAK,EAAE,yBAAyB,EAAE,MAAM,YAAY,CAAC;AAE5D,eAAO,MAAM,mBAAmB,EAAE,yBAuEjC,CAAC"}

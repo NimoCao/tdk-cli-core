@@ -1,1 +1,1 @@
-{"version":3,"file":"go.d.ts","sourceRoot":"","sources":["../../src/backend-languages/go.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,uBAAuB,EAAE,MAAM,YAAY,CAAC;AAE1D;;;GAGG;AACH,eAAO,MAAM,cAAc,aAAa,CAAC;AAEzC,eAAO,MAAM,iBAAiB,EAAE,uBA2F/B,CAAC"}
+{"version":3,"file":"go.d.ts","sourceRoot":"","sources":["../../src/backend-languages/go.ts"],"names":[],"mappings":"AAEA,OAAO,KAAK,EAAE,uBAAuB,EAAE,MAAM,YAAY,CAAC;AAE1D;;;GAGG;AACH,eAAO,MAAM,cAAc,aAAa,CAAC;AAEzC,eAAO,MAAM,iBAAiB,EAAE,uBA2F/B,CAAC"}

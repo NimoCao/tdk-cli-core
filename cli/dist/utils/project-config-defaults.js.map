@@ -1,1 +1,1 @@
-{"version":3,"file":"project-config-defaults.js","sourceRoot":"","sources":["../../src/utils/project-config-defaults.ts"],"names":[],"mappings":"AAAA;;;;;;;;;;;;GAYG;AACH,MAAM,CAAC,MAAM,4BAA4B,GAAG,CAAC,qBAAqB,EAAE,OAAO,CAAU,CAAC"}
+{"version":3,"file":"project-config-defaults.js","sourceRoot":"","sources":["../../src/utils/project-config-defaults.ts"],"names":[],"mappings":"AAAA,gDAAgD;AAChD,+BAA+B;AAC/B;;;;;;;;;;;;GAYG;AACH,MAAM,CAAC,MAAM,4BAA4B,GAAG,CAAC,qBAAqB,EAAE,OAAO,CAAU,CAAC"}

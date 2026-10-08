@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 /** The env var that moves each host port TDK publishes. Services publish no host ports, so only these conflict. */
 const PORT_ENV_VARS = {
     "80": "TDK_HTTP_PORT",

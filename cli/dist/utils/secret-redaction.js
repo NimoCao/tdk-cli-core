@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { parseEnv } from "./env-validator.js";

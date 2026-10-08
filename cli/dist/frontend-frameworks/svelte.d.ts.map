@@ -1,1 +1,1 @@
-{"version":3,"file":"svelte.d.ts","sourceRoot":"","sources":["../../src/frontend-frameworks/svelte.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,yBAAyB,EAAE,MAAM,YAAY,CAAC;AAE5D,eAAO,MAAM,sBAAsB,EAAE,yBAkEpC,CAAC"}
+{"version":3,"file":"svelte.d.ts","sourceRoot":"","sources":["../../src/frontend-frameworks/svelte.ts"],"names":[],"mappings":"AAEA,OAAO,KAAK,EAAE,yBAAyB,EAAE,MAAM,YAAY,CAAC;AAE5D,eAAO,MAAM,sBAAsB,EAAE,yBAkEpC,CAAC"}

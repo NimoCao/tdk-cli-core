@@ -1,4 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { Box, Text } from "ink";
 import { useTUITheme } from "./ui-theme.js";
 /** One line per service that is not ready and has a reason, so a failed dependency is named on screen. */

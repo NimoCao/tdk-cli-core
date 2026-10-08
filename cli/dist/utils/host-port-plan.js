@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { createServer } from "node:net";
 import { hasLocalListener } from "./port-listener-probe.js";
 export const DEFAULT_HOST_PORT_RANGES = {

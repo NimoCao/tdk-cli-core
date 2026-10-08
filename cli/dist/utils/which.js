@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { existsSync } from "node:fs";
 import { delimiter, extname, join } from "node:path";
 import { isWindows, pathLookups } from "./platform.js";

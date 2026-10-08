@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { MIN_BUN_VERSION, versionMeetsMinimum } from "../commands/doctor.js";
 /** The Bun floor `tdk doctor` enforces, so `tdk up` cannot drift from it. */
 export function bunMeetsFloor(version) {

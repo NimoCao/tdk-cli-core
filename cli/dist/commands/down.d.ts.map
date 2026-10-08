@@ -1,1 +1,1 @@
-{"version":3,"file":"down.d.ts","sourceRoot":"","sources":["../../src/commands/down.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,OAAO,EAAE,MAAM,WAAW,CAAC;AA8CpC,eAAO,MAAM,WAAW,SAsEpB,CAAC"}
+{"version":3,"file":"down.d.ts","sourceRoot":"","sources":["../../src/commands/down.ts"],"names":[],"mappings":"AAGA,OAAO,EAAE,OAAO,EAAE,MAAM,WAAW,CAAC;AA8CpC,eAAO,MAAM,WAAW,SAsEpB,CAAC"}

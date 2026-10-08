@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { getBackendIndexTemplate } from "../backend-languages/bun.js";
 import { TdkError } from "../utils/errors.js";
 import { elysiaBackendProvider } from "./elysia.js";

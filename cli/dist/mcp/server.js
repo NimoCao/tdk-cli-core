@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 /**
  * A minimal Model Context Protocol server over newline-delimited JSON-RPC 2.0 (the stdio transport). It implements only
  * what a tools-only server needs: initialize, ping, tools/list and tools/call. Keeping it dependency-free keeps the

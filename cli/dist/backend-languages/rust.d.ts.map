@@ -1,1 +1,1 @@
-{"version":3,"file":"rust.d.ts","sourceRoot":"","sources":["../../src/backend-languages/rust.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,uBAAuB,EAAE,MAAM,YAAY,CAAC;AAE1D;;;GAGG;AACH,eAAO,MAAM,gBAAgB,cAAc,CAAC;AAE5C,eAAO,MAAM,mBAAmB,EAAE,uBA4EjC,CAAC"}
+{"version":3,"file":"rust.d.ts","sourceRoot":"","sources":["../../src/backend-languages/rust.ts"],"names":[],"mappings":"AAEA,OAAO,KAAK,EAAE,uBAAuB,EAAE,MAAM,YAAY,CAAC;AAE1D;;;GAGG;AACH,eAAO,MAAM,gBAAgB,cAAc,CAAC;AAE5C,eAAO,MAAM,mBAAmB,EAAE,uBA4EjC,CAAC"}

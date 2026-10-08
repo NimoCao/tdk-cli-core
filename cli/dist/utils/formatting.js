@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import chalk from "chalk";
 function pluralize(count, singular, plural) {
     return count === 1 ? singular : plural || `${singular}s`;

@@ -1,1 +1,1 @@
-{"version":3,"file":"qwik.d.ts","sourceRoot":"","sources":["../../src/frontend-frameworks/qwik.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,yBAAyB,EAAE,MAAM,YAAY,CAAC;AAE5D,eAAO,MAAM,oBAAoB,EAAE,yBA4DlC,CAAC"}
+{"version":3,"file":"qwik.d.ts","sourceRoot":"","sources":["../../src/frontend-frameworks/qwik.ts"],"names":[],"mappings":"AAEA,OAAO,KAAK,EAAE,yBAAyB,EAAE,MAAM,YAAY,CAAC;AAE5D,eAAO,MAAM,oBAAoB,EAAE,yBA4DlC,CAAC"}

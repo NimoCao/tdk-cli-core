@@ -1,1 +1,1 @@
-{"version":3,"file":"fastify.d.ts","sourceRoot":"","sources":["../../src/backend-frameworks/fastify.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,wBAAwB,EAAE,MAAM,YAAY,CAAC;AAE3D,wBAAgB,uBAAuB,CAAC,IAAI,EAAE,MAAM,UAmCnD;AAED,eAAO,MAAM,sBAAsB,EAAE,wBAMpC,CAAC"}
+{"version":3,"file":"fastify.d.ts","sourceRoot":"","sources":["../../src/backend-frameworks/fastify.ts"],"names":[],"mappings":"AAEA,OAAO,KAAK,EAAE,wBAAwB,EAAE,MAAM,YAAY,CAAC;AAE3D,wBAAgB,uBAAuB,CAAC,IAAI,EAAE,MAAM,UAmCnD;AAED,eAAO,MAAM,sBAAsB,EAAE,wBAMpC,CAAC"}

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { execFileSync, execSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { createServer } from "node:net";

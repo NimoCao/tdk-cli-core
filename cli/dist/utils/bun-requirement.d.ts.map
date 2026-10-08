@@ -1,1 +1,1 @@
-{"version":3,"file":"bun-requirement.d.ts","sourceRoot":"","sources":["../../src/utils/bun-requirement.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,kBAAkB,EAAE,MAAM,mBAAmB,CAAC;AAG5D;;;GAGG;AACH,wBAAgB,eAAe,CAAC,SAAS,EAAE,SAAS,kBAAkB,EAAE,GAAG,OAAO,CAOjF"}
+{"version":3,"file":"bun-requirement.d.ts","sourceRoot":"","sources":["../../src/utils/bun-requirement.ts"],"names":[],"mappings":"AAEA,OAAO,KAAK,EAAE,kBAAkB,EAAE,MAAM,mBAAmB,CAAC;AAG5D;;;GAGG;AACH,wBAAgB,eAAe,CAAC,SAAS,EAAE,SAAS,kBAAkB,EAAE,GAAG,OAAO,CAOjF"}

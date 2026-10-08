@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { connect } from "node:net";
 /**
  * True when something already accepts connections on 127.0.0.1:port. Binding a socket to find out is not enough:

@@ -1,1 +1,1 @@
-{"version":3,"file":"resource-kind.d.ts","sourceRoot":"","sources":["../../src/utils/resource-kind.ts"],"names":[],"mappings":"AAAA;;;GAGG;AACH,wBAAgB,gBAAgB,CAAC,OAAO,EAAE,MAAM,GAAG,SAAS,GAAG,OAAO,CAErE"}
+{"version":3,"file":"resource-kind.d.ts","sourceRoot":"","sources":["../../src/utils/resource-kind.ts"],"names":[],"mappings":"AAEA;;;GAGG;AACH,wBAAgB,gBAAgB,CAAC,OAAO,EAAE,MAAM,GAAG,SAAS,GAAG,OAAO,CAErE"}

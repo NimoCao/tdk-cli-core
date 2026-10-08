@@ -1,1 +1,1 @@
-{"version":3,"file":"elysia.d.ts","sourceRoot":"","sources":["../../src/backend-frameworks/elysia.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,wBAAwB,EAAE,MAAM,YAAY,CAAC;AAE3D,wBAAgB,sBAAsB,CAAC,IAAI,EAAE,MAAM,UA8BlD;AAED,eAAO,MAAM,qBAAqB,EAAE,wBAMnC,CAAC"}
+{"version":3,"file":"elysia.d.ts","sourceRoot":"","sources":["../../src/backend-frameworks/elysia.ts"],"names":[],"mappings":"AAEA,OAAO,KAAK,EAAE,wBAAwB,EAAE,MAAM,YAAY,CAAC;AAE3D,wBAAgB,sBAAsB,CAAC,IAAI,EAAE,MAAM,UA8BlD;AAED,eAAO,MAAM,qBAAqB,EAAE,wBAMnC,CAAC"}

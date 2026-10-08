@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { existsSync, readdirSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import chalk from "chalk";

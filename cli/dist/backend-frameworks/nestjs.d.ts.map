@@ -1,1 +1,1 @@
-{"version":3,"file":"nestjs.d.ts","sourceRoot":"","sources":["../../src/backend-frameworks/nestjs.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,wBAAwB,EAAE,MAAM,YAAY,CAAC;AAE3D,wBAAgB,oBAAoB,CAAC,IAAI,EAAE,MAAM,UAuChD;AAED,eAAO,MAAM,mBAAmB,EAAE,wBAcjC,CAAC"}
+{"version":3,"file":"nestjs.d.ts","sourceRoot":"","sources":["../../src/backend-frameworks/nestjs.ts"],"names":[],"mappings":"AAEA,OAAO,KAAK,EAAE,wBAAwB,EAAE,MAAM,YAAY,CAAC;AAE3D,wBAAgB,oBAAoB,CAAC,IAAI,EAAE,MAAM,UAuChD;AAED,eAAO,MAAM,mBAAmB,EAAE,wBAcjC,CAAC"}

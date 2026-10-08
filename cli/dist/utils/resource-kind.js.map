@@ -1,1 +1,1 @@
-{"version":3,"file":"resource-kind.js","sourceRoot":"","sources":["../../src/utils/resource-kind.ts"],"names":[],"mappings":"AAAA;;;GAGG;AACH,MAAM,UAAU,gBAAgB,CAAC,OAA2B;IAC1D,OAAO,OAAO,KAAK,SAAS,IAAI,OAAO,KAAK,KAAK,CAAC;AACpD,CAAC"}
+{"version":3,"file":"resource-kind.js","sourceRoot":"","sources":["../../src/utils/resource-kind.ts"],"names":[],"mappings":"AAAA,gDAAgD;AAChD,+BAA+B;AAC/B;;;GAGG;AACH,MAAM,UAAU,gBAAgB,CAAC,OAA2B;IAC1D,OAAO,OAAO,KAAK,SAAS,IAAI,OAAO,KAAK,KAAK,CAAC;AACpD,CAAC"}

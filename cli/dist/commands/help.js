@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import chalk from "chalk";
 import pkg from "../../package.json" with { type: "json" };
 const TDK_BANNER = `

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 function levenshteinDistance(left, right) {
     let previousRow = Array.from({ length: right.length + 1 }, (_, index) => index);
     for (let leftIndex = 1; leftIndex <= left.length; leftIndex++) {

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { spawn } from "node:child_process";
 import { join } from "node:path";
 import { errorFactories } from "./errors.js";

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { existsSync } from "node:fs";
 export const WEBCONTAINER_DOCS = "docs/agent-hosts.md";
 export const WEBCONTAINER_UP_MESSAGE = `WebContainers cannot run TDK: there is no Docker daemon or Tilt. Run \`tdk up\` on a machine with Docker. See ${WEBCONTAINER_DOCS}.`;

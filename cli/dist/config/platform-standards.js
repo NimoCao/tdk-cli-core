@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { PORT_RANGES, STANDARD_PORTS } from "../utils/constants.js";
 const PLATFORM_VERSION = "1.0.0";
 const TECH_STACK = {

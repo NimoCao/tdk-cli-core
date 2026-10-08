@@ -1,1 +1,1 @@
-{"version":3,"file":"atomic-write.d.ts","sourceRoot":"","sources":["../../src/utils/atomic-write.ts"],"names":[],"mappings":"AAaA;;;GAGG;AACH,wBAAgB,mBAAmB,CAAC,QAAQ,EAAE,MAAM,EAAE,OAAO,EAAE,MAAM,GAAG,IAAI,CA0B3E"}
+{"version":3,"file":"atomic-write.d.ts","sourceRoot":"","sources":["../../src/utils/atomic-write.ts"],"names":[],"mappings":"AAeA;;;GAGG;AACH,wBAAgB,mBAAmB,CAAC,QAAQ,EAAE,MAAM,EAAE,OAAO,EAAE,MAAM,GAAG,IAAI,CA0B3E"}

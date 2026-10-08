@@ -1,1 +1,1 @@
-{"version":3,"file":"ResourceTable.d.ts","sourceRoot":"","sources":["../../src/components/ResourceTable.tsx"],"names":[],"mappings":"AACA,OAAO,KAAK,KAAK,MAAM,OAAO,CAAC;AAC/B,OAAO,KAAK,EAAE,kBAAkB,EAAE,MAAM,mBAAmB,CAAC;AAI5D,eAAO,MAAM,aAAa,EAAE,KAAK,CAAC,EAAE,CAAC,kBAAkB,CAsGtD,CAAC"}
+{"version":3,"file":"ResourceTable.d.ts","sourceRoot":"","sources":["../../src/components/ResourceTable.tsx"],"names":[],"mappings":"AAGA,OAAO,KAAK,KAAK,MAAM,OAAO,CAAC;AAC/B,OAAO,KAAK,EAAE,kBAAkB,EAAE,MAAM,mBAAmB,CAAC;AAI5D,eAAO,MAAM,aAAa,EAAE,KAAK,CAAC,EAAE,CAAC,kBAAkB,CAsGtD,CAAC"}

@@ -1,4 +1,6 @@
 import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { Command } from "commander";
 import { Box, render, Text, useApp, useInput, useStdin, useStdout } from "ink";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";

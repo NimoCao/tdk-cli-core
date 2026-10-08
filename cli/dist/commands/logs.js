@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { Command } from "commander";
 import { STANDARD_PORTS } from "../utils/constants.js";
 import { errorFactories, runCommand, showErrorAndExit, TdkError } from "../utils/errors.js";

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { TdkError } from "./errors.js";
 export function createMachineEnvelope(data, errors = []) {
     return { schemaVersion: 1, data, errors };

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import { stdin as input, stdout as output } from "node:process";
 import { createInterface } from "node:readline/promises";
 async function question(prompt) {

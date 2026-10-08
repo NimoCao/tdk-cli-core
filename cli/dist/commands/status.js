@@ -1,3 +1,5 @@
+// Copyright (c) 2026 TDK Landscape contributors
+// SPDX-License-Identifier: MIT
 import chalk from "chalk";
 import { Command } from "commander";
 import { createDiscoveryContext } from "../utils/discovery-context.js";
